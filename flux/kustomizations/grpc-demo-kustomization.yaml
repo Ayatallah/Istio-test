@@ -9,5 +9,5 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  path: ./demo/grpc-loadbalancing
+  path: ./demos/grpc-loadbalancing
   prune: true
