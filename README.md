@@ -27,7 +27,8 @@ flux bootstrap github --branch=main --path=/flux --owner Ayatallah --repository 
 ## **Istio Installation**
 
 Istio supports multiple [installation methods](https://istio.io/latest/docs/setup/install/).  
-Based on experience, installing Istio using `istioctl` is recommended, as shown in the [getting started guide](https://istio.io/latest/docs/setup/getting-started/#download):
+
+In [getting started guide](https://istio.io/latest/docs/setup/getting-started/#download), Istio is installed via `istioctl` as shown below:
 
 ```sh
 curl -L https://istio.io/downloadIstio | sh -
@@ -45,7 +46,8 @@ EOF
 istioctl install -f operator.yaml
 ```
 
-This method is equivalent to installing **only `istio-base` and `istiod` via Helm**, as done in this repository under `/istio/system`.  
+Based on experience, the above is equivalent to installing **only `istio-base` and `istiod` via Helm**, as done in this repository under `/istio/system`.  
+
 The [Deployment Profiles Documentation](https://istio.io/latest/docs/setup/additional-setup/config-profiles/#deployment-profiles) clarifies the components included in each profile.
 
 ### **References**
@@ -62,7 +64,7 @@ The [Deployment Profiles Documentation](https://istio.io/latest/docs/setup/addit
 This demo is based on a **Hello World gRPC application** consisting of a gRPC server and client.  
 You can use the [gRPC quickstart guide](https://grpc.io/docs/languages/go/quickstart/) for any language and **dockerize** it, as demonstrated in [this repository](https://github.com/anvilco/load-balance-grpc-k8s).
 
-Instead of building the application from scratch, I used a **pre-built, dockerized version** for testing:
+🔹 Instead of building the application from scratch, I used a **pre-built, dockerized version** for testing:
 
 ```sh
 docker pull ghcr.io/anvilco/load-balance-grpc-k8s:latest
@@ -85,11 +87,7 @@ node greeter_client
 All responses were handled by a **single** gRPC server pod, meaning no load balancing was occurring.
 
 #### **🔹 Enable Istio Sidecar Injection**
-To enable **Envoy proxy-based load balancing**, label the namespace as defined in `demos/grpc-loadbalancing/namespace.yaml`:
-
-```sh
-kubectl label namespace grpcdemo istio-injection=enabled
-```
+To enable **Envoy proxy-based load balancing**, label the namespace as defined in `demos/grpc-loadbalancing/namespace.yaml`.
 
 Then, **restart the gRPC pods** to trigger sidecar injection:
 
@@ -97,7 +95,7 @@ Then, **restart the gRPC pods** to trigger sidecar injection:
 kubectl delete pods -n grpcdemo --all
 ```
 
-Once the new pods start **with both the Envoy proxy and gRPC application**, running the same test:
+Once the new pods start with two containers **Envoy proxy and gRPC application**, repeat the same test:
 
 ```sh
 kubectl exec -it greeter-client-6b8cdf6989-wcgqv -n grpcdemo -- sh
