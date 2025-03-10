@@ -185,6 +185,8 @@ kubectl run -it --rm curl --image=radial/busyboxplus:curl --restart=Never -- sh
 curl 10.43.67.210:9080/api/v1/products
 [{"id": 0, "title": "The Comedy of Errors", "descriptionHtml": "<a href=\"https://en.wikipedia.org/wiki/The_Comedy_of_Errors\">Wikipedia Summary</a>: The Comedy of Errors is one of <b>William Shakespeare's</b> early plays. It is his shortest and one of his most farcical comedies, with a major part of the humour coming from slapstick and mistaken identity, in addition to puns and word play."}]
 ```
+📌 **Initial Observation:**
+Response received successfully. :white_check_mark:
 
 Then, update **mLTS mode** to **STRICT** as in `demos/mlts/peer-authentication.yaml` & try again:
 
@@ -194,19 +196,21 @@ kubectl run -it --rm curl --image=radial/busyboxplus:curl --restart=Never -- sh
 root@curl:/ ]$ curl 10.43.67.210:9080/api/v1/products
 curl: (56) Recv failure: Connection reset by peer
 ```
+👉 **Final Observation:**  
+Failure Received. Because, as mLTS mode is STRICT, istio side-car container require a certificate, and since this curl does not have a certificate, the request is rejected.
 
 **mLTS mode** can be set for specific workload using `spec.selector.matchLabels` or for specific port using `spec.portLevelMtls` as shown in [docs](https://istio.io/latest/docs/reference/config/security/peer_authentication/).
 
 Istio has its own Certificate Authority (Citadel or Istiod) for key and certificate management, which issues certificates. However, Istio integrates with cert-manager and can use its certificates for mLTS secure connections.
 
 #### **References**
-[Mutual TLS Authentication](https://istio.io/latest/docs/concepts/security/#mutual-tls-authentication)
-[mLTS Migration](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/)
-[Istio Authentication Architecture](https://istio.io/latest/docs/concepts/security/#authentication-architecture)
-[Peer Authentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
-[Istio Security Peer Authentication & mLTS](https://harsh05.medium.com/understanding-istio-security-peer-authentication-and-mtls-for-microservices-d1fd1ef60d55)
-[Istio Cert Manager Integration](https://istio.io/latest/docs/ops/integrations/certmanager/)
-[Istio In Practice Cert Manager Integration](https://docs.tetrate.io/istio-subscription/istio-in-practice/cert-manager-integration)
+- [Mutual TLS Authentication](https://istio.io/latest/docs/concepts/security/#mutual-tls-authentication)
+- [mLTS Migration](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/)
+- [Istio Authentication Architecture](https://istio.io/latest/docs/concepts/security/#authentication-architecture)
+- [Peer Authentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
+- [Istio Security Peer Authentication & mLTS](https://harsh05.medium.com/understanding-istio-security-peer-authentication-and-mtls-for-microservices-d1fd1ef60d55)
+- [Istio Cert Manager Integration](https://istio.io/latest/docs/ops/integrations/certmanager/)
+- [Istio In Practice Cert Manager Integration](https://docs.tetrate.io/istio-subscription/istio-in-practice/cert-manager-integration)
 
 ### **4️⃣ Circuit Breaking**
 🚧 **To be added**
