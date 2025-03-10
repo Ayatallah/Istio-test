@@ -214,6 +214,28 @@ Istio has its own Certificate Authority (Citadel or Istiod) for key and certific
 
 ### **4️⃣ Circuit Breaking**
 
+This demo uses Httpbin as running istio service, and the steps are straight forward as shown in [docs](https://istio.io/latest/docs/tasks/traffic-management/circuit-breaking/)
+
+Resources needed are all added in `demos/circuit-breaking` & then running commands below:
+
+```
+kubectl exec fortio-deploy-pod-id -c fortio -n httpbin -- /usr/bin/fortio curl -quiet http://httpbin:8000/get
+
+kubectl exec fortio-deploy-pod-id -c fortio -n httpbin -- /usr/bin/fortio load -c 2 -qps 0 -n 20 -loglevel Warning http://httpbin:8000/get
+
+kubectl exec fortio-deploy-pod-id -c fortio -n httpbin -- /usr/bin/fortio load -c 3 -qps 0 -n 30 -loglevel Warning  http://httpbin:8000/get
+```
+
+& see how `istio-proxy` open the circuits for further requests and connections when failures occur whether due to 5xx errors returned due to faulty/missing heathy pods or the too strict trafficPolicy resulting in rejected requests/failures.
+
+If **mLTS** is enabled, the DestinationRule must include the following trafficPolicy:
+```
+trafficPolicy:
+  tls:
+    mode: ISTIO_MUTUAL
+```
+As shown [here](https://istio.io/latest/docs/ops/common-problems/network-issues/#503-errors-after-setting-destination-rule)
+
 #### **References**
 - [Circuit Breaking](https://istio.io/latest/docs/tasks/traffic-management/circuit-breaking/)
 - [Istio Advanced Circuit Breaking & Chaos Engineering](https://ibrahimhkoyuncu.medium.com/istio-powered-resilience-advanced-circuit-breaking-and-chaos-engineering-for-microservices-c3aefcb8d9a9)
