@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: productpage
+  namespace: bookinfo
 spec:
   hosts:
   - productpage
@@ -15,6 +16,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: reviews
+  namespace: bookinfo
 spec:
   hosts:
   - reviews
@@ -28,6 +30,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: ratings
+  namespace: bookinfo
 spec:
   hosts:
   - ratings
@@ -41,6 +44,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: details
+  namespace: bookinfo
 spec:
   hosts:
   - details
