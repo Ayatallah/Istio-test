@@ -213,4 +213,7 @@ Istio has its own Certificate Authority (Citadel or Istiod) for key and certific
 - [Istio In Practice Cert Manager Integration](https://docs.tetrate.io/istio-subscription/istio-in-practice/cert-manager-integration)
 
 ### **4️⃣ Circuit Breaking**
-🚧 **To be added**
+
+#### **References**
+- [Circuit Breaking](https://istio.io/latest/docs/tasks/traffic-management/circuit-breaking/)
+- [Istio Advanced Circuit Breaking & Chaos Engineering](https://ibrahimhkoyuncu.medium.com/istio-powered-resilience-advanced-circuit-breaking-and-chaos-engineering-for-microservices-c3aefcb8d9a9)
