@@ -170,7 +170,14 @@ This is just the most basic traffic management demo. There's much more to explor
 ---
 
 ### **3️⃣ Mutual TLS (mTLS)**
-🚧 **To be added**
+Istio by default runs mLTS in the permissive mode,  which allows a service to accept both plaintext traffic and mutual TLS traffic at the same time.
+
+This demo continues using Bookinfo application. 
+
+#### **References**
+https://istio.io/latest/docs/concepts/security/#mutual-tls-authentication
+https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/
+https://istio.io/latest/docs/concepts/security/#authentication-architecture
 
 ### **4️⃣ Circuit Breaking**
 🚧 **To be added**
