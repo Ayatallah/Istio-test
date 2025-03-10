@@ -4,6 +4,7 @@ namespace: bookinfo
 resources:
   - namespace.yaml
   - resources.yaml
+  - bookinfo-gateway.yaml
   - destination-rules.yaml
 #  - traffic-shift-v1.yaml
   - traffic-shift-v1-v3.yaml

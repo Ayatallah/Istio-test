@@ -45,16 +45,27 @@ EOF
 
 istioctl install -f operator.yaml
 ```
+This way allows Istio components to be managed by the Istio Operator, which provides simplified lifecycle management with built-in automation that makes testing easier.
 
-Based on experience, the above is equivalent to installing **only `istio-base` and `istiod` via Helm**, as done in this repository under `/istio/system`.  
+For testing in this repo, Istio components **only `istio-base` and `istiod`** are installed via helm under `/istio/system`. This allow directly installing components without Operator installing/managing them providing more fine-grained control. The [Deployment Profiles Documentation](https://istio.io/latest/docs/setup/additional-setup/config-profiles/#deployment-profiles) clarifies the components included in each profile.
 
-The [Deployment Profiles Documentation](https://istio.io/latest/docs/setup/additional-setup/config-profiles/#deployment-profiles) clarifies the components included in each profile.
+In both methods, IstioOperator or Helm, we will need to ensure Kubernetes Gateway API CRDs are installed. In [getting started guide](https://istio.io/latest/docs/setup/getting-started/#download), this is ensured as below:
+```
+kubectl get crd gateways.gateway.networking.k8s.io &> /dev/null || \
+{ kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v1.2.1" | kubectl apply -f -; }
+```
+In this repo, these CRDs are added under `/istio/crds`
 
-### **References**
+For production environment, the suitable installation method for Istio components and CRDs deployment to be chosen carefully, taking into consideration best practices regarding CRDs management.
+
+### **Helm Installation References**
 - [Istio Helm Installation](https://istio.io/latest/docs/setup/install/helm/)
 - [Istio Base Helm Chart](https://artifacthub.io/packages/helm/istio-official/base)
 - [Istiod Helm Chart](https://artifacthub.io/packages/helm/istio-official/istiod)
 - [Installing Istio with Flux](https://trstringer.com/install-istio-flux/)
+https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations https://github.com/kubernetes-sigs/gateway-api/discussions/2655
+https://github.com/fluxcd/flux2/discussions/4457
+
 
 ---
 
@@ -111,5 +122,4 @@ Load is now **evenly distributed** across all server pods, demonstrating gRPC lo
 
 ---
 
-### **2️⃣ Circuit Breaking (To Be Added)**
-🛠️ **Coming Soon...**
+### **2️⃣ Traffic Management**
