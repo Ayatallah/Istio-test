@@ -197,16 +197,16 @@ curl: (56) Recv failure: Connection reset by peer
 
 **mLTS mode** can be set for specific workload using `spec.selector.matchLabels` or for specific port using `spec.portLevelMtls` as shown in [docs](https://istio.io/latest/docs/reference/config/security/peer_authentication/).
 
-Also, Istio had its own Certificate Authority (Citadel or Istiod) for key and certificate management, which issues certificates. However, Istio integrates with cert-manager and can use its certificates for mLTS secure connections.
+Istio has its own Certificate Authority (Citadel or Istiod) for key and certificate management, which issues certificates. However, Istio integrates with cert-manager and can use its certificates for mLTS secure connections.
 
 #### **References**
-(Mutual TLS Authentication)[https://istio.io/latest/docs/concepts/security/#mutual-tls-authentication]
-(mLTS Migration)[https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/]
-(Istio Authentication Architecture)[https://istio.io/latest/docs/concepts/security/#authentication-architecture]
-(Peer Authentication)[https://istio.io/latest/docs/reference/config/security/peer_authentication/]
-(Istio Security Peer Authentication & mLTS)[https://harsh05.medium.com/understanding-istio-security-peer-authentication-and-mtls-for-microservices-d1fd1ef60d55]
-(Istio Cert Manager Integration)[https://istio.io/latest/docs/ops/integrations/certmanager/]
-(Istio In Practice Cert Manager Integration)[https://docs.tetrate.io/istio-subscription/istio-in-practice/cert-manager-integration]
+[Mutual TLS Authentication](https://istio.io/latest/docs/concepts/security/#mutual-tls-authentication)
+[mLTS Migration](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/)
+[Istio Authentication Architecture](https://istio.io/latest/docs/concepts/security/#authentication-architecture)
+[Peer Authentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
+[Istio Security Peer Authentication & mLTS](https://harsh05.medium.com/understanding-istio-security-peer-authentication-and-mtls-for-microservices-d1fd1ef60d55)
+[Istio Cert Manager Integration](https://istio.io/latest/docs/ops/integrations/certmanager/)
+[Istio In Practice Cert Manager Integration](https://docs.tetrate.io/istio-subscription/istio-in-practice/cert-manager-integration)
 
 ### **4️⃣ Circuit Breaking**
 🚧 **To be added**
