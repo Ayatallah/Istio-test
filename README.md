@@ -239,3 +239,10 @@ As shown [here](https://istio.io/latest/docs/ops/common-problems/network-issues/
 #### **References**
 - [Circuit Breaking](https://istio.io/latest/docs/tasks/traffic-management/circuit-breaking/)
 - [Istio Advanced Circuit Breaking & Chaos Engineering](https://ibrahimhkoyuncu.medium.com/istio-powered-resilience-advanced-circuit-breaking-and-chaos-engineering-for-microservices-c3aefcb8d9a9)
+
+
+### **5️⃣ Observability**
+🚧 **To be added**
+
+### **6️⃣Extensibility**
+🚧 **To be added**
