@@ -170,14 +170,43 @@ This is just the most basic traffic management demo. There's much more to explor
 ---
 
 ### **3️⃣ Mutual TLS (mTLS)**
-Istio by default runs mLTS in the permissive mode,  which allows a service to accept both plaintext traffic and mutual TLS traffic at the same time.
 
-This demo continues using Bookinfo application. 
+This demo continues using Bookinfo application.
+
+Istio by default runs mLTS in the permissive mode, which allows a service to accept both plaintext traffic and mutual TLS traffic at the same time.
+
+Curl any of the bookinfo application services:
+
+```
+kubectl get svc -n bookinfo # to get all services, pick productpage for example
+
+kubectl run -it --rm curl --image=radial/busyboxplus:curl --restart=Never -- sh
+
+curl 10.43.67.210:9080/api/v1/products
+[{"id": 0, "title": "The Comedy of Errors", "descriptionHtml": "<a href=\"https://en.wikipedia.org/wiki/The_Comedy_of_Errors\">Wikipedia Summary</a>: The Comedy of Errors is one of <b>William Shakespeare's</b> early plays. It is his shortest and one of his most farcical comedies, with a major part of the humour coming from slapstick and mistaken identity, in addition to puns and word play."}]
+```
+
+Then, update **mLTS mode** to **STRICT** as in `demos/mlts/peer-authentication.yaml` & try again:
+
+```
+kubectl run -it --rm curl --image=radial/busyboxplus:curl --restart=Never -- sh
+
+root@curl:/ ]$ curl 10.43.67.210:9080/api/v1/products
+curl: (56) Recv failure: Connection reset by peer
+```
+
+**mLTS mode** can be set for specific workload using `spec.selector.matchLabels` or for specific port using `spec.portLevelMtls` as shown in [docs](https://istio.io/latest/docs/reference/config/security/peer_authentication/).
+
+Also, Istio had its own Certificate Authority (Citadel or Istiod) for key and certificate management, which issues certificates. However, Istio integrates with cert-manager and can use its certificates for mLTS secure connections.
 
 #### **References**
-https://istio.io/latest/docs/concepts/security/#mutual-tls-authentication
-https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/
-https://istio.io/latest/docs/concepts/security/#authentication-architecture
+(Mutual TLS Authentication)[https://istio.io/latest/docs/concepts/security/#mutual-tls-authentication]
+(mLTS Migration)[https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/]
+(Istio Authentication Architecture)[https://istio.io/latest/docs/concepts/security/#authentication-architecture]
+(Peer Authentication)[https://istio.io/latest/docs/reference/config/security/peer_authentication/]
+(Istio Security Peer Authentication & mLTS)[https://harsh05.medium.com/understanding-istio-security-peer-authentication-and-mtls-for-microservices-d1fd1ef60d55]
+(Istio Cert Manager Integration)[https://istio.io/latest/docs/ops/integrations/certmanager/]
+(Istio In Practice Cert Manager Integration)[https://docs.tetrate.io/istio-subscription/istio-in-practice/cert-manager-integration]
 
 ### **4️⃣ Circuit Breaking**
 🚧 **To be added**
