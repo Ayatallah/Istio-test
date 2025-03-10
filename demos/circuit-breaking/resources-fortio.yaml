@@ -1,4 +1,5 @@
 # https://raw.githubusercontent.com/istio/istio/release-1.25/samples/httpbin/sample-client/fortio-deploy.yamlapiVersion: v1
+apiVersion: apps/v1
 kind: Service
 metadata:
   name: fortio
