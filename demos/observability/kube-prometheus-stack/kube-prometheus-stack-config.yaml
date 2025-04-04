@@ -5,7 +5,7 @@ metadata:
   namespace: monitoring
 data:
   values.yaml: |
-  
+
     prometheus:
       serviceMonitor:
         selfMonitor: false
@@ -29,7 +29,9 @@ data:
       create: false
 
     alertmanager:
-      enabled: false
+      enabled: true
+      serviceMonitor:
+        selfMonitor: false
 
     grafana:
       enabled: true
