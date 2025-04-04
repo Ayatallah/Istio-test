@@ -14,7 +14,6 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: observability
-      reconcileStrategy: Revision
   values:
     # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
 
