@@ -1,0 +1,59 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: istio-sidecars
+  namespace: observability # Change to where Prometheus is watching (e.g., observability)
+spec:
+  selector:
+    matchLabels:
+      security.istio.io/tlsMode: 'istio'
+  namespaceSelector:
+    matchNames:
+      - bookinfo  # Namespace where the pods are
+  podMetricsEndpoints:
+    - port: envoy-prom  # This must match the container port name
+      path: /stats/prometheus
+      interval: 30s
+      relabelings:
+        - sourceLabels: [__meta_kubernetes_pod_container_port_name]
+          action: keep
+          regex: '.*-envoy-prom'
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: istio-ingressgateway
+spec:
+  selector:
+    matchLabels:
+      gateway.istio.io/managed: istio.io-gateway-controller
+  namespaceSelector:
+    matchNames:
+      - bookinfo
+  endpoints:
+    - port: status-port
+      interval: 30s
+      relabelings:
+        - sourceLabels: [__meta_kubernetes_endpoint_port_name]
+          action: keep
+          regex: status-port
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: istiod
+  namespace: observability
+spec:
+  selector:
+    matchLabels:
+      app: istiod  # Adjust this to match the actual labels on the istiod service
+  namespaceSelector:
+    matchNames:
+      - istio-system
+  endpoints:
+    - port: http-monitoring
+      interval: 30s
+      relabelings:
+        - sourceLabels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+          action: keep
+          regex: istiod;http-monitoring
