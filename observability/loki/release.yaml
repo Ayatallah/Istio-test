@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: loki
-  namespace: monitoring
+  namespace: observability
 spec:
   interval: 1m
   releaseName: loki
@@ -13,7 +13,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana
-        namespace: monitoring
+        namespace: observability
       reconcileStrategy: Revision
   values:
     # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
@@ -62,7 +62,7 @@ spec:
         ring:
           kvstore:
             store: inmemory
-        alertmanager_url: http://kube-prometheus-stack-alertmanager.monitoring:9093
+        alertmanager_url: http://kube-prometheus-stack-alertmanager.observability:9093
         enable_alertmanager_v2: true
         enable_api: true
       compactor:
