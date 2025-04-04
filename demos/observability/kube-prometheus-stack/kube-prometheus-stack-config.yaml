@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-prometheus-stack-config
+  namespace: monitoring
+data:
+  values.yaml: |
+  
+    prometheus:
+      serviceMonitor:
+        selfMonitor: false
+      prometheusSpec:
+        retention: 14d
+        # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml#L3046
+        serviceMonitorSelectorNilUsesHelmValues: true
+        # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml#L3069
+        podMonitorSelectorNilUsesHelmValues: true
+        # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml#L3113
+        scrapeConfigSelectorNilUsesHelmValues: true
+        # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml#L3866
+        ruleSelectorNilUsesHelmValues: false
+        # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml#L3091
+        probeSelectorNilUsesHelmValues: true
+
+
+    # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml#L163
+    # Example: https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/templates/prometheus/rules-1.14/k8s.rules.container_memory_working_set_bytes.yaml#L30C50-L30C77
+    defaultRules:
+      create: false
+
+    alertmanager:
+      enabled: false
+
+    grafana:
+      enabled: true
+      assertNoLeakedSecrets: false
+      additionalDataSources:
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki.monitoring:3100
+          editable: true
+          jsonData:
+            maxLines: 10000
+            minRefreshInterval: 5s
+
+    prometheusOperator:
+      kubeletService:
+        enabled: false
+      serviceMonitor:
+        selfMonitor: false
+
+    # disable metrics unavailable for managed Kubernetes distributions (GKE, EKS, AKS)
+    kubeEtcd:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeControllerManager:
+      enabled: false
+
+    # disable subcharts to stop scraping thru this instance
+
+    kubeApiServer:
+      enabled: false
+    kubelet:
+      enabled: false
+    coreDns:
+      enabled: false
+
+    kubeDns:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeStateMetrics:
+      enabled: false
+    nodeExporter:
+      enabled: false
