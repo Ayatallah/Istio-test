@@ -1,0 +1,154 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: loki
+  namespace: monitoring
+spec:
+  interval: 1m
+  releaseName: loki
+  chart:
+    spec:
+      chart: loki
+      version: '6.18.0'
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: monitoring
+      reconcileStrategy: Revision
+  values:
+    # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
+
+    loki:
+      auth_enabled: false
+      storage_config:
+        tsdb_shipper:
+          active_index_directory: /var/loki/index
+        filesystem:
+          directory: /var/loki/chunks
+      query_scheduler:
+        # the TSDB index dispatches many more, but each individually smaller, requests.
+        # We increase the pending request queue sizes to compensate
+        max_outstanding_requests_per_tenant: 32768
+      querier:
+        #  Each `querier` component process runs a number of parallel workers to process queries simultaneously.
+        max_concurrent: 16
+      storage:
+        type: "filesystem"
+      # https://grafana.com/docs/loki/latest/configuration/#common_config
+      commonConfig:
+        path_prefix: "/var/loki"
+        replication_factor: 1
+      # https://grafana.com/docs/loki/latest/configure/#schema_config
+      schemaConfig:
+        # TDSB is recommended, BoltDB used earlier is now deprecated
+        # https://grafana.com/docs/loki/latest/storage/
+        configs:
+          - from: "2024-10-30"
+            store: tsdb
+            object_store: filesystem
+            schema: v13
+            index:
+              prefix: index_
+              period: 24h
+      # https://grafana.com/docs/loki/latest/configuration/#ruler
+      rulerConfig:
+        wal:
+          dir: /var/loki/ruler-wal
+        storage:
+          type: local
+          local:
+            directory: /var/loki/rules
+        rule_path: /var/loki/rules-temp
+        ring:
+          kvstore:
+            store: inmemory
+        alertmanager_url: http://kube-prometheus-stack-alertmanager.monitoring:9093
+        enable_alertmanager_v2: true
+        enable_api: true
+      compactor:
+        working_directory: /var/loki/compactor
+        compaction_interval: 10m
+        retention_enabled: true
+        delete_request_store: filesystem
+        # retention_delete_delay is safer to be longer for production, ex: 2h
+        retention_delete_delay: 10m
+        retention_delete_worker_count: 150
+      limits_config:
+        retention_period: 72h # 3 days
+        max_entries_limit_per_query: 50000 # default: 5000
+    deploymentMode: SingleBinary
+    singleBinary:
+      extraVolumeMounts:
+        # fake is tenant name for single tenant loki deployment
+        - name: rules
+          mountPath: /var/loki/rules/fake/rules.yaml
+          subPath: rules.yaml
+      extraVolumes:
+        - name: rules
+          configMap:
+            defaultMode: 420
+            name: loki-alert-rules
+      replicas: 1
+
+      persistence:
+        enabled: true
+
+    # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml#L546
+    monitoring:
+      dashboards:
+        enabled: false
+      rules:
+        enabled: false
+        alerting: false
+      serviceMonitor:
+        enabled: false
+      selfMonitoring:
+        # This feature currently relies on the Grafana Agent Operator being installed
+        enabled: false
+        grafanaAgent:
+          installOperator: false
+
+    test:
+      enabled: false
+    gateway:
+      service:
+        type: NodePort
+
+
+    lokiCanary:
+      enabled: false
+    chunksCache:
+      # -- Specifies whether memcached based chunks-cache should be enabled
+      enabled: false
+    resultsCache:
+      # -- Specifies whether memcached based results-cache should be enabled
+      enabled: false
+    memcachedExporter:
+      # -- Whether memcached metrics should be exported
+      enabled: false
+    # Zero out replica counts of other deployment modes
+    backend:
+      replicas: 0
+    read:
+      replicas: 0
+    write:
+      replicas: 0
+
+    ingester:
+      replicas: 0
+    querier:
+      replicas: 0
+    queryFrontend:
+      replicas: 0
+    queryScheduler:
+      replicas: 0
+    distributor:
+      replicas: 0
+    compactor:
+      replicas: 0
+    indexGateway:
+      replicas: 0
+    bloomCompactor:
+      replicas: 0
+    bloomGateway:
+      replicas: 0
