@@ -53,7 +53,7 @@ data:
       kubeletService:
         enabled: true
       serviceMonitor:
-        selfMonitor: false
+        selfMonitor: true
 
     # disable metrics unavailable for managed Kubernetes distributions (GKE, EKS, AKS)
     kubeEtcd:
