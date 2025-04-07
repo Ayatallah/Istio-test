@@ -36,8 +36,6 @@ spec:
   values:
     meshConfig:
       accessLogFile: "/dev/stdout"
-      accessLogFormat: json
-      AccessLogEncoding: JSON
     global:
       proxy:
         resources:
