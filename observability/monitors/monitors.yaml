@@ -3,6 +3,8 @@ kind: PodMonitor
 metadata:
   name: istio-sidecars
   namespace: observability # Change to where Prometheus is watching (e.g., observability)
+  labels:
+    release: kube-prometheus-stack
 spec:
   selector:
     matchLabels:
@@ -24,6 +26,8 @@ kind: ServiceMonitor
 metadata:
   name: istio-ingressgateway
   namespace: observability
+  labels:
+    release: kube-prometheus-stack
 spec:
   selector:
     matchLabels:
@@ -44,6 +48,8 @@ kind: ServiceMonitor
 metadata:
   name: istiod
   namespace: observability
+  labels:
+    release: kube-prometheus-stack
 spec:
   selector:
     matchLabels:
