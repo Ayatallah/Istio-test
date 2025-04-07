@@ -13,7 +13,7 @@ spec:
   podMetricsEndpoints:
     - port: envoy-prom  # This must match the container port name
       path: /stats/prometheus
-      interval: 30s
+      interval: 15s
       relabelings:
         - sourceLabels: [__meta_kubernetes_pod_container_port_name]
           action: keep
@@ -33,7 +33,7 @@ spec:
       - bookinfo
   endpoints:
     - port: status-port
-      interval: 30s
+      interval: 15s
       relabelings:
         - sourceLabels: [__meta_kubernetes_endpoint_port_name]
           action: keep
@@ -53,7 +53,7 @@ spec:
       - istio-system
   endpoints:
     - port: http-monitoring
-      interval: 30s
+      interval: 15s
       relabelings:
         - sourceLabels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
           action: keep
