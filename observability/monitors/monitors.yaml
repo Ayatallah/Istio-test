@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: istio-proxy
-  namespace: istio-system
+  namespace: observability
   labels:
     istio: proxy
     release: kube-prometheus-stack
@@ -29,7 +29,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: istio-ingressgateway
-  namespace: istio-system
+  namespace: observability
   labels:
     release: kube-prometheus-stack
 spec:
@@ -47,7 +47,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: istiod
-  namespace: istio-system
+  namespace: observability
   labels:
     release: kube-prometheus-stack
 spec:
