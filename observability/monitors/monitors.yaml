@@ -12,9 +12,10 @@ spec:
     matchLabels:
       security.istio.io/tlsMode: "istio"
   namespaceSelector:
-    any: true
+    matchNames:
+      - bookinfo
   podMetricsEndpoints:
-    - interval: 15s
+    - interval: 30s
       path: /stats/prometheus
       relabelings:
         - action: replace
@@ -58,4 +59,4 @@ spec:
       - istio-system
   endpoints:
     - port: http-monitoring
-      interval: 15s
+      interval: 30s
