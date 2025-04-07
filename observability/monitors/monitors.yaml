@@ -35,10 +35,9 @@ metadata:
 spec:
   selector:
     matchLabels:
-      istio: ingressgateway
+      gateway.istio.io/managed: istio.io-gateway-controller
   namespaceSelector:
-    matchNames:
-      - istio-system
+    any: true
   endpoints:
     - targetPort: http-envoy-prom
       path: /stats/prometheus
@@ -53,7 +52,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      istio: pilot
+      app: istiod
   namespaceSelector:
     matchNames:
       - istio-system
