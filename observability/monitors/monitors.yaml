@@ -1,66 +1,57 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: istio-sidecars
-  namespace: observability # Change to where Prometheus is watching (e.g., observability)
+  name: istio-proxy
+  namespace: istio-system
   labels:
-    release: kube-prometheus-stack
+    istio: proxy
 spec:
+  jobLabel: component
   selector:
     matchLabels:
-      security.istio.io/tlsMode: 'istio'
+      security.istio.io/tlsMode: "istio"
   namespaceSelector:
-    matchNames:
-      - bookinfo  # Namespace where the pods are
+    any: true
   podMetricsEndpoints:
-    - port: envoy-prom  # This must match the container port name
+    - interval: 15s
       path: /stats/prometheus
-      interval: 15s
       relabelings:
-        - sourceLabels: [__meta_kubernetes_pod_container_port_name]
-          action: keep
-          regex: '.*-envoy-prom'
+        - action: replace
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          sourceLabels:
+            - __address__
+            - __meta_kubernetes_pod_annotation_prometheus_io_port
+          targetLabel: __address__
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: istio-ingressgateway
-  namespace: observability
-  labels:
-    release: kube-prometheus-stack
+  namespace: istio-system
 spec:
   selector:
     matchLabels:
-      gateway.istio.io/managed: istio.io-gateway-controller
+      istio: ingressgateway
   namespaceSelector:
     matchNames:
-      - bookinfo
+      - istio-system
   endpoints:
-    - port: status-port
-      interval: 15s
-      relabelings:
-        - sourceLabels: [__meta_kubernetes_endpoint_port_name]
-          action: keep
-          regex: status-port
+    - targetPort: http-envoy-prom
+      path: /stats/prometheus
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: istiod
-  namespace: observability
-  labels:
-    release: kube-prometheus-stack
+  namespace: istio-system
 spec:
   selector:
     matchLabels:
-      app: istiod  # Adjust this to match the actual labels on the istiod service
+      istio: pilot
   namespaceSelector:
     matchNames:
       - istio-system
   endpoints:
     - port: http-monitoring
       interval: 15s
-      relabelings:
-        - sourceLabels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
-          action: keep
-          regex: istiod;http-monitoring
