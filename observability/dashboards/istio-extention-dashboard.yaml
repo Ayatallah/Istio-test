@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: istio-extension-dashboard
   labels:
-    grafana_dashboard: "true"
+    grafana_dashboard: "1"
   annotations:
     grafana_dashboard_folder: Istio
 data:
