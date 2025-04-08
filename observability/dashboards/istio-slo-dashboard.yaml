@@ -74,7 +74,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "$datasource"
           },
           "description": "",
           "gridPos": {
@@ -105,7 +105,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "job:error_budget_http:slo",
@@ -116,7 +116,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "job:error_budget_http:remaining{destination_workload=\"$workload\"}",
@@ -128,7 +128,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate5m{destination_workload=\"$workload\"}) * 100",
@@ -140,7 +140,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate30m{destination_workload=\"$workload\"}) * 100",
@@ -152,7 +152,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate2h{destination_workload=\"$workload\"}) * 100",
@@ -164,7 +164,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate6h{destination_workload=\"$workload\"}) * 100",
@@ -176,7 +176,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate24h{destination_workload=\"$workload\"}) * 100",
@@ -188,7 +188,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate3d{destination_workload=\"$workload\"}) * 100",
@@ -204,7 +204,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "$datasource"
           },
           "description": "non-5xx response code",
           "fieldConfig": {
@@ -282,7 +282,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "job:error_budget_http:slo",
@@ -293,7 +293,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -306,7 +306,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate5m{destination_service_name=\"$workload\"}) * 100 OR on() vector(100)",
@@ -318,7 +318,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate30m{destination_service_name=\"$workload\"}) * 100 OR on() vector(100)",
@@ -330,7 +330,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate2h{destination_service_name=\"$workload\"}) * 100 OR on() vector(100)",
@@ -342,7 +342,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate6h{destination_service_name=\"$workload\"}) * 100 OR on() vector(100)",
@@ -354,7 +354,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate24h{destination_service_name=\"$workload\"}) * 100 OR on() vector(100)",
@@ -366,7 +366,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate3d{destination_service_name=\"$workload\"}) * 100 OR on() vector(100)",
@@ -382,7 +382,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "$datasource"
           },
           "description": "",
           "gridPos": {
@@ -413,7 +413,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "job:error_budget_http:slo",
@@ -424,7 +424,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "job:error_budget_http:remaining{destination_workload=\"$workload\"}",
@@ -436,7 +436,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate5m{destination_workload=\"$workload\"}) * 100",
@@ -448,7 +448,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate30m{destination_workload=\"$workload\"}) * 100",
@@ -460,7 +460,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate2h{destination_workload=\"$workload\"}) * 100",
@@ -472,7 +472,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate6h{destination_workload=\"$workload\"}) * 100",
@@ -484,7 +484,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate24h{destination_workload=\"$workload\"}) * 100",
@@ -496,7 +496,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_http_error:ratio_rate3d{destination_workload=\"$workload\"}) * 100",
@@ -512,7 +512,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "$datasource"
           },
           "description": "Based on Cloudprober periodic health-checks",
           "fieldConfig": {
@@ -594,7 +594,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "job:error_budget:slo",
@@ -605,7 +605,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "job:error_budget:remaining{dst=\"$workload\"} OR on() vector(100)",
@@ -617,7 +617,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_errors_per_request:ratio_rate5m{dst=\"$workload\"}) * 100 OR on() vector(100)",
@@ -629,7 +629,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_errors_per_request:ratio_rate30m{dst=\"$workload\"}) * 100 OR on() vector(100)",
@@ -641,7 +641,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_errors_per_request:ratio_rate2h{dst=\"$workload\"}) * 100 OR on() vector(100)",
@@ -653,7 +653,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_errors_per_request:ratio_rate6h{dst=\"$workload\"}) * 100 OR on() vector(100)",
@@ -665,7 +665,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_errors_per_request:ratio_rate24h{dst=\"$workload\"}) * 100 OR on() vector(100)",
@@ -677,7 +677,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
               },
               "editorMode": "code",
               "expr": "(1 - job:slo_errors_per_request:ratio_rate3d{dst=\"$workload\"}) * 100 OR on() vector(100)",
@@ -700,7 +700,7 @@ data:
             "current": {},
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "$datasource"
             },
             "definition": "query_result(sum(istio_requests_total) by (destination_workload_namespace) or sum(istio_tcp_sent_bytes_total) by (destination_workload_namespace))",
             "hide": 0,
@@ -724,7 +724,7 @@ data:
             "current": {},
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS}"
+              "uid": "$datasource"
             },
             "definition": "query_result((sum(istio_requests_total{destination_workload_namespace=~\"$namespace\"}) by (destination_workload) or sum(istio_requests_total{source_workload_namespace=~\"$namespace\"}) by (source_workload)) or (sum(istio_tcp_sent_bytes_total{destination_workload_namespace=~\"$namespace\"}) by (destination_workload) or sum(istio_tcp_sent_bytes_total{source_workload_namespace=~\"$namespace\"}) by (source_workload)))",
             "hide": 0,
