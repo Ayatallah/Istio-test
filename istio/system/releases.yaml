@@ -41,8 +41,8 @@ spec:
 
     meshConfig:
       accessLogFile: "/dev/stdout"
-      #accessLogEncoding: JSON
-      accessLogFormat: "%START_TIME% %REQ(:METHOD)% %DURATION%\n"
+      accessLogEncoding: JSON
+      #accessLogFormat: "%START_TIME% %REQ(:METHOD)% %DURATION%\n"
 
     global:
       proxy:
