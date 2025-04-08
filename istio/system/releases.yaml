@@ -34,11 +34,21 @@ spec:
         name: istio
       interval: 1m
   values:
+    resources:
+      requests:
+        cpu: 500m
+        memory: 2048Mi
+
     meshConfig:
       accessLogFile: "/dev/stdout"
+      accessLogEncoding: JSON
+      accessLogFormat: "%START_TIME% %REQ(:METHOD)% %DURATION%\n"
+
     global:
       proxy:
         resources:
           requests:
             cpu: "100m"
             memory: "128Mi"
+      # imagePullSecrets:
+      #   - test
