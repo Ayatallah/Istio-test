@@ -41,7 +41,7 @@ spec:
 
     meshConfig:
       accessLogFile: "/dev/stdout"
-      accessLogEncoding: JSON
+      #accessLogEncoding: JSON
       accessLogFormat: "%START_TIME% %REQ(:METHOD)% %DURATION%\n"
 
     global:
