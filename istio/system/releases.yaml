@@ -46,6 +46,16 @@ spec:
         {
           "start_time": "%START_TIME%",
           "method": "%REQ(:METHOD)%",
+          "path": "%REQ(X-ENVOY-ORIGINAL-PATH?:PATH)%",
+          "protocol": "%PROTOCOL%",
+          "request_id": "%REQ(X-REQUEST-ID)%",
+          "response_code": "%RESPONSE_CODE%",
+          "req_forwarded":"%REQ(X-FORWARDED-FOR)%",
+          "req_user":"%REQ(USER-AGENT)%",
+          "UPSTREAM_HOST": "%UPSTREAM_HOST%",
+          "upstream": "%UPSTREAM_CLUSTER_RAW%",
+          "bytes_sent": "%BYTES_SENT%",
+          "bytes_received": "%BYTES_RECEIVED%",
           "duration": "%DURATION%"
         }
 
