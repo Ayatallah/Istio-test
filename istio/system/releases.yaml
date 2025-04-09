@@ -41,23 +41,23 @@ spec:
 
     meshConfig:
       accessLogFile: "/dev/stdout"
-      accessLogEncoding: JSON
-      accessLogFormat: |
-        {
-          "start_time": "%START_TIME%",
-          "method": "%REQ(:METHOD)%",
-          "path": "%REQ(X-ENVOY-ORIGINAL-PATH?:PATH)%",
-          "protocol": "%PROTOCOL%",
-          "request_id": "%REQ(X-REQUEST-ID)%",
-          "user_agent": "%REQ(USER-AGENT)%",
-          "x_forwarded_for": "%REQ(X-FORWARDED-FOR)%",
-          "response_code": "%RESPONSE_CODE%",
-          "bytes_received": "%BYTES_RECEIVED%",
-          "bytes_sent": "%BYTES_SENT%",
-          "duration_ms": "%DURATION%",
-          "upstream_cluster": "%UPSTREAM_CLUSTER%",
-          "upstream_host": "%UPSTREAM_HOST%"
-        }
+      accessLogEncoding: TXT
+      # accessLogFormat: |
+      #   {
+      #     "start_time": "%START_TIME%",
+      #     "method": "%REQ(:METHOD)%",
+      #     "path": "%REQ(X-ENVOY-ORIGINAL-PATH?:PATH)%",
+      #     "protocol": "%PROTOCOL%",
+      #     "request_id": "%REQ(X-REQUEST-ID)%",
+      #     "user_agent": "%REQ(USER-AGENT)%",
+      #     "x_forwarded_for": "%REQ(X-FORWARDED-FOR)%",
+      #     "response_code": "%RESPONSE_CODE%",
+      #     "bytes_received": "%BYTES_RECEIVED%",
+      #     "bytes_sent": "%BYTES_SENT%",
+      #     "duration_ms": "%DURATION%",
+      #     "upstream_cluster": "%UPSTREAM_CLUSTER%",
+      #     "upstream_host": "%UPSTREAM_HOST%"
+      #   }
 
     global:
       proxy:
