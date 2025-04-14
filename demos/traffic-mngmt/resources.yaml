@@ -57,7 +57,7 @@ metadata:
   name: details-v1
   labels:
     app.kubernetes.io/name: details
-    app.kubernetes.io/app.kubernetes.io/version: v1
+    app.kubernetes.io/version: v1
 spec:
   replicas: 1
   selector:
@@ -114,7 +114,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: ratings
-      app.kubernetes.io/app.kubernetes.io/version: v1
+      app.kubernetes.io/version: v1
   template:
     metadata:
       labels:
