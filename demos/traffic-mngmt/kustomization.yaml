@@ -8,3 +8,4 @@ resources:
   - destination-rules.yaml
 #  - traffic-shift-v1.yaml
   - traffic-shift-v1-v3.yaml
+  - envoy-filter.yaml
