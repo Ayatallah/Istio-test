@@ -2,6 +2,8 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: hello-cronjob
+  labels:
+    sidecar.istio.io/inject: "false"
 spec:
   schedule: "*/1 * * * *"  # runs every minute
   jobTemplate:
