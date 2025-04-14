@@ -2,13 +2,14 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: hello-cronjob
-  annotations:
-    sidecar.istio.io/inject: "false"
 spec:
   schedule: "*/1 * * * *"  # runs every minute
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            sidecar.istio.io/inject: "false"
         spec:
           containers:
           - name: hello
