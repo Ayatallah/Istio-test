@@ -58,7 +58,6 @@ metadata:
   name: details-v1
   labels:
     app.kubernetes.io/name: details
-    app: test
     app.kubernetes.io/version: v1
 spec:
   replicas: 1
@@ -66,7 +65,6 @@ spec:
     matchLabels:
       app.kubernetes.io/name: details
       app.kubernetes.io/version: v1
-      app: test
   template:
     metadata:
       labels:
