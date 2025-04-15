@@ -66,11 +66,13 @@ spec:
     matchLabels:
       app.kubernetes.io/name: details
       app.kubernetes.io/version: v1
+      app: test
   template:
     metadata:
       labels:
         app.kubernetes.io/name: details
         app.kubernetes.io/version: v1
+        app: test
     spec:
       serviceAccountName: bookinfo-details
       containers:
