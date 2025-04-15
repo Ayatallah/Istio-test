@@ -43,6 +43,7 @@ spec:
     name: http
   selector:
     app.kubernetes.io/name: details
+    app: test
 ---
 apiVersion: v1
 kind: ServiceAccount
