@@ -58,6 +58,7 @@ metadata:
   name: details-v1
   labels:
     app.kubernetes.io/name: details
+    app: test
     app.kubernetes.io/version: v1
 spec:
   replicas: 1
