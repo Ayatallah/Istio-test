@@ -43,7 +43,6 @@ spec:
     name: http
   selector:
     app: details
-    app: test
 ---
 apiVersion: v1
 kind: ServiceAccount
