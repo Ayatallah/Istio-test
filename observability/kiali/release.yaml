@@ -47,12 +47,11 @@ spec:
         enabled: true
       istio:
         root_namespace: "istio-system"
-    login_token:
-      signing_key: CHANGEME00000000
-    external_services:
       # Kiali will not start up without tracing service. We don't want to require it.
       tracing:
         enabled: false
+    login_token:
+      signing_key: CHANGEME00000000
     # server:
     #   port: 20001
     #   #node_port:
