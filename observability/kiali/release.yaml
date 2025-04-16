@@ -1,0 +1,63 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kiali
+  namespace: observability
+spec:
+  interval: 1m
+  releaseName: kiali
+  chart:
+    spec:
+      chart: kiali-server
+      sourceRef:
+        kind: HelmRepository
+        name: kiali
+        namespace: observability
+  values:
+    # https://github.com/kiali/helm-charts/blob/master/kiali-server/values.yaml
+    istio_namespace: "istio-system"
+    # We set up anonymous authentication as this is for demos.
+    auth:
+      strategy: anonymous
+    deployment:
+      pod_labels:
+        sidecar.istio.io/inject: "false"
+      ingress_enabled: false
+      image_pull_policy: IfNotPresent
+      # node_selector: {}
+      # pod_annotations: {}
+      # pod_labels: {}
+      #image_pull_secrets: []
+      # ingress:
+      #   additional_labels: {}
+      #   class_name: "nginx"
+      #   #enabled:
+      #   override_yaml:
+      #     metadata: {}
+      # resources:
+      #   requests:
+      #     cpu: "10m"
+      #     memory: "64Mi"
+      #   limits:
+      #     memory: "1Gi"
+      service_type: "ClusterIP"
+      # tolerations: []
+    external_services:
+      custom_dashboards:
+        enabled: true
+      istio:
+        root_namespace: "istio-system"
+    login_token:
+      signing_key: CHANGEME00000000
+    external_services:
+      # Kiali will not start up without tracing service. We don't want to require it.
+      tracing:
+        enabled: false
+    # server:
+    #   port: 20001
+    #   #node_port:
+    #   observability:
+    #     metrics:
+    #       enabled: true
+    #       port: 9090
+    #   web_root: ""
