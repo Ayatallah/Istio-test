@@ -43,6 +43,9 @@ spec:
       service_type: "ClusterIP"
       # tolerations: []
     external_services:
+      grafana:
+        enabled: true
+        in_cluster_url: "http://kube-prometheus-stack-grafana.observability:80/"
       prometheus:
         url: "http://kube-prometheus-stack-prometheus.observability:9090/"
       custom_dashboards:
