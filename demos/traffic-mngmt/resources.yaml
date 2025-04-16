@@ -35,14 +35,14 @@ kind: Service
 metadata:
   name: details
   labels:
-    app.kubernetes.io/name: details
+    app: details
     service: details
 spec:
   ports:
   - port: 9080
     name: http
   selector:
-    app.kubernetes.io/name: details
+    app: details
     app: test
 ---
 apiVersion: v1
@@ -57,20 +57,19 @@ kind: Deployment
 metadata:
   name: details-v1
   labels:
-    app.kubernetes.io/name: details
-    app.kubernetes.io/version: v1
+    app: details
+    version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: details
-      app.kubernetes.io/version: v1
+      app: details
+      version: v1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: details
-        app.kubernetes.io/version: v1
-        app: test
+        app: details
+        version: v1
     spec:
       serviceAccountName: bookinfo-details
       containers:
@@ -88,14 +87,14 @@ kind: Service
 metadata:
   name: ratings
   labels:
-    app.kubernetes.io/name: ratings
+    app: ratings
     service: ratings
 spec:
   ports:
   - port: 9080
     name: http
   selector:
-    app.kubernetes.io/name: ratings
+    app: ratings
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -109,19 +108,19 @@ kind: Deployment
 metadata:
   name: ratings-v1
   labels:
-    app.kubernetes.io/name: ratings
-    app.kubernetes.io/version: v1
+    app: ratings
+    version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: ratings
-      app.kubernetes.io/version: v1
+      app: ratings
+      version: v1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: ratings
-        app.kubernetes.io/version: v1
+        app: ratings
+        version: v1
     spec:
       serviceAccountName: bookinfo-ratings
       containers:
@@ -139,14 +138,14 @@ kind: Service
 metadata:
   name: reviews
   labels:
-    app.kubernetes.io/name: reviews
+    app: reviews
     service: reviews
 spec:
   ports:
   - port: 9080
     name: http
   selector:
-    app.kubernetes.io/name: reviews
+    app: reviews
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -160,19 +159,19 @@ kind: Deployment
 metadata:
   name: reviews-v1
   labels:
-    app.kubernetes.io/name: reviews
-    app.kubernetes.io/version: v1
+    app: reviews
+    version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: reviews
-      app.kubernetes.io/version: v1
+      app: reviews
+      version: v1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: reviews
-        app.kubernetes.io/version: v1
+        app: reviews
+        version: v1
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -200,19 +199,19 @@ kind: Deployment
 metadata:
   name: reviews-v2
   labels:
-    app.kubernetes.io/name: reviews
-    app.kubernetes.io/version: v2
+    app: reviews
+    version: v2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: reviews
-      app.kubernetes.io/version: v2
+      app: reviews
+      version: v2
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: reviews
-        app.kubernetes.io/version: v2
+        app: reviews
+        version: v2
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -240,19 +239,19 @@ kind: Deployment
 metadata:
   name: reviews-v3
   labels:
-    app.kubernetes.io/name: reviews
-    app.kubernetes.io/version: v3
+    app: reviews
+    version: v3
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: reviews
-      app.kubernetes.io/version: v3
+      app: reviews
+      version: v3
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: reviews
-        app.kubernetes.io/version: v3
+        app: reviews
+        version: v3
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -283,14 +282,14 @@ kind: Service
 metadata:
   name: productpage
   labels:
-    app.kubernetes.io/name: productpage
+    app: productpage
     service: productpage
 spec:
   ports:
   - port: 9080
     name: http
   selector:
-    app.kubernetes.io/name: productpage
+    app: productpage
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -304,14 +303,14 @@ kind: Deployment
 metadata:
   name: productpage-v1
   labels:
-    app.kubernetes.io/name: productpage
-    app.kubernetes.io/version: v1
+    app: productpage
+    version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: productpage
-      app.kubernetes.io/version: v1
+      app: productpage
+      version: v1
   template:
     metadata:
       annotations:
@@ -319,8 +318,8 @@ spec:
         prometheus.io/port: "9080"
         prometheus.io/path: "/metrics"
       labels:
-        app.kubernetes.io/name: productpage
-        app.kubernetes.io/version: v1
+        app: productpage
+        version: v1
     spec:
       serviceAccountName: bookinfo-productpage
       containers:
