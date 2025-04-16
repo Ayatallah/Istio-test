@@ -43,6 +43,8 @@ spec:
       service_type: "ClusterIP"
       # tolerations: []
     external_services:
+      prometheus:
+        url: "http://kube-prometheus-stack-prometheus.observability:9090/"
       custom_dashboards:
         enabled: true
       istio:
