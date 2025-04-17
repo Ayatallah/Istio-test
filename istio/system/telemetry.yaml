@@ -8,17 +8,22 @@ spec:
     - providers:
         - name: prometheus
       overrides:
-        - tagOverrides:
-            source_app:
-              operation: UPSERT
-              value: "node.metadata['LABELS']['app.kubernetes.io/name']"
-          match:
+        - match:
             mode: CLIENT
             metric: ALL_METRICS
-        - tagOverrides:
+          tagOverrides:
             source_app:
               operation: UPSERT
-              value: "downstream_peer.labels['app.kubernetes.io/name'].value"
-          match:
+              value: source.labels["app.kubernetes.io/name"] |
+                     source.labels["app"] |
+                     node.metadata["LABELS"]["app.kubernetes.io/name"] |
+                     "unknown"
+        - match:
             mode: SERVER
             metric: ALL_METRICS
+          tagOverrides:
+            source_app:
+              operation: UPSERT
+              value: source.labels["app.kubernetes.io/name"] |
+                     source.labels["app"] |
+                     "unknown"
