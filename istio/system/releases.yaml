@@ -47,23 +47,23 @@ spec:
               metrics:
                 - name: "*"
                   dimensions:
-                    source_app: 'source.labels["app"] | "unknown"'
+                    source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
                     source_version: 'source.labels["version"] | "unknown"'
                     destination_workload: 'destination.workload.name | "unknown"'
                     destination_workload_namespace: 'destination.workload.namespace | "unknown"'
                     destination_principal: 'destination.principal | "unknown"'
-                    destination_app: 'destination.labels["app"] | "unknown"'
+                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "unknown"'
                     destination_version: 'destination.labels["version"] | "unknown"'
             outboundSidecar:
               metrics:
                 - name: "*"
                   dimensions:
-                    source_app: 'source.labels["app"] | "unknown"'
+                    source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
                     source_version: 'source.labels["version"] | "unknown"'
                     destination_workload: 'destination.workload.name | "unknown"'
                     destination_workload_namespace: 'destination.workload.namespace | "unknown"'
                     destination_principal: 'destination.principal | "unknown"'
-                    destination_app: 'destination.labels["app"] | "unknown"'
+                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "unknown"'
                     destination_version: 'destination.labels["version"] | "unknown"'
             gateway:
               metrics:
