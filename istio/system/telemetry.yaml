@@ -10,6 +10,7 @@ spec:
       overrides:
         - match:
             metric: "ALL_METRICS"
+            mode: CLIENT_AND_SERVER
           tagOverrides:
             source_app:
               value: 'source.labels["app.kubernetes.io/name"] | source.labels["app"] | "test"'
