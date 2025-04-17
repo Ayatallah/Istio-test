@@ -7,7 +7,7 @@ spec:
   metrics:
     - overrides:
         - match:
-            metric: "*"
+            metric: "ALL_METRICS"
           tagOverrides:
             source_app:
               value: source.labels["app.kubernetes.io/name"] | "TEST"
