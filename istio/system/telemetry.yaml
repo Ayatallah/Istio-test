@@ -20,4 +20,4 @@ spec:
           tagOverrides:
             source_app:
               operation: UPSERT
-              value: "has(source.labels[\"app.kubernetes.io/name'"]) ? source.labels[\"app.kubernetes.io/name\"] : 'test'"
+              value: "has(source.labels[\"app.kubernetes.io/name\"]) ? source.labels[\"app.kubernetes.io/name\"] : 'test'"
