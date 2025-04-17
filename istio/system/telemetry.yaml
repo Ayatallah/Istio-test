@@ -13,4 +13,5 @@ spec:
               value: 'source.labels["app.kubernetes.io/name"] | "TEST"'
             destination_app:
               value: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
-              operation: TST
+      providers:
+        - name: prometheus
