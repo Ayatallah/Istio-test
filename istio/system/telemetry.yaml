@@ -11,7 +11,9 @@ spec:
           tagOverrides:
             source_app:
               value: 'source.labels["app.kubernetes.io/name"] | "test"'
+              operation: UPSERT
             destination_app:
               value: 'destination.labels["app.kubernetes.io/name"] | "test"'
+              operation: UPSERT
       providers:
         - name: prometheus
