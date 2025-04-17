@@ -1,13 +1,13 @@
-apiVersion: telemetry.istio.io/v1alpha1
+apiVersion: telemetry.istio.io/v1
 kind: Telemetry
 metadata:
   name: custom-metrics
   namespace: istio-system
 spec:
   metrics:
-    providers:
-      - name: prometheus
-    - overrides:
+    - providers:
+        - name: prometheus
+      overrides:
         - match:
             metric: "ALL_METRICS"
           tagOverrides:
