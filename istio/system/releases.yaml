@@ -38,7 +38,7 @@ spec:
       requests:
         cpu: 500m
         memory: 2048Mi
-        
+
     telemetry:
       v2:
         prometheus:
@@ -53,7 +53,7 @@ spec:
                     destination_workload: 'destination.workload.name | "unknown"'
                     destination_workload_namespace: 'destination.workload.namespace | "unknown"'
                     destination_principal: 'destination.principal | "unknown"'
-                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "unknown"'
+                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
                     destination_version: 'destination.labels["version"] | "unknown"'
             outboundSidecar:
               metrics:
@@ -64,7 +64,7 @@ spec:
                     destination_workload: 'destination.workload.name | "unknown"'
                     destination_workload_namespace: 'destination.workload.namespace | "unknown"'
                     destination_principal: 'destination.principal | "unknown"'
-                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "unknown"'
+                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
                     destination_version: 'destination.labels["version"] | "unknown"'
             gateway:
               metrics:
