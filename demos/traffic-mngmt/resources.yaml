@@ -42,7 +42,7 @@ spec:
   - port: 9080
     name: http
   selector:
-    app: details
+    app.kubernetes.io/name: details
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -56,18 +56,18 @@ kind: Deployment
 metadata:
   name: details-v1
   labels:
-    app: details
+    app.kubernetes.io/name: details
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: details
+      app.kubernetes.io/name: details
       version: v1
   template:
     metadata:
       labels:
-        app: details
+        app.kubernetes.io/name: details
         version: v1
     spec:
       serviceAccountName: bookinfo-details
@@ -86,7 +86,7 @@ kind: Service
 metadata:
   name: ratings
   labels:
-    app: ratings
+    app.kubernetes.io/name: ratings
     service: ratings
 spec:
   ports:
@@ -107,18 +107,18 @@ kind: Deployment
 metadata:
   name: ratings-v1
   labels:
-    app: ratings
+    app.kubernetes.io/name: ratings
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ratings
+      app.kubernetes.io/name: ratings
       version: v1
   template:
     metadata:
       labels:
-        app: ratings
+        app.kubernetes.io/name: ratings
         version: v1
     spec:
       serviceAccountName: bookinfo-ratings
