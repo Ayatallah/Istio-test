@@ -1,0 +1,15 @@
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: custom-metrics
+  namespace: istio-system  # or your target namespace
+spec:
+  metrics:
+    overrides:
+      - match:
+          metric: "*"
+        tagOverrides:
+          source_app:
+            value: 'source.labels["app.kubernetes.io/name"] | "TEST"'
+          destination_app:
+            value: 'destination.labels["app.kubernetes.io/name"] | "TEST"'

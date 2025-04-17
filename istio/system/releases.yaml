@@ -39,39 +39,39 @@ spec:
         cpu: 500m
         memory: 2048Mi
 
-    telemetry:
-      v2:
-        prometheus:
-          enabled: true
-          configOverride:
-            inboundSidecar:
-              metrics:
-                - name: "requests_total"
-                  dimensions:
-                    source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
-                    source_version: 'source.labels["version"] | "unknown"'
-                    destination_workload: 'destination.workload.name | "unknown"'
-                    destination_workload_namespace: 'destination.workload.namespace | "unknown"'
-                    destination_principal: 'destination.principal | "unknown"'
-                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
-                    destination_version: 'destination.labels["version"] | "unknown"'
-            outboundSidecar:
-              metrics:
-                - name: "requests_total"
-                  dimensions:
-                    source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
-                    source_version: 'source.labels["version"] | "unknown"'
-                    destination_workload: 'destination.workload.name | "unknown"'
-                    destination_workload_namespace: 'destination.workload.namespace | "unknown"'
-                    destination_principal: 'destination.principal | "unknown"'
-                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
-                    destination_version: 'destination.labels["version"] | "unknown"'
-            gateway:
-              metrics:
-                - name: "requests_total"
-                  dimensions:
-                    source_app: 'source.labels["app.kubernetes.io/name"] | "TEST"'
-                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
+    # telemetry:
+    #   v2:
+    #     prometheus:
+    #       enabled: true
+    #       configOverride:
+    #         inboundSidecar:
+    #           metrics:
+    #             - name: "requests_total"
+    #               dimensions:
+    #                 source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
+    #                 source_version: 'source.labels["version"] | "unknown"'
+    #                 destination_workload: 'destination.workload.name | "unknown"'
+    #                 destination_workload_namespace: 'destination.workload.namespace | "unknown"'
+    #                 destination_principal: 'destination.principal | "unknown"'
+    #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
+    #                 destination_version: 'destination.labels["version"] | "unknown"'
+    #         outboundSidecar:
+    #           metrics:
+    #             - name: "requests_total"
+    #               dimensions:
+    #                 source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
+    #                 source_version: 'source.labels["version"] | "unknown"'
+    #                 destination_workload: 'destination.workload.name | "unknown"'
+    #                 destination_workload_namespace: 'destination.workload.namespace | "unknown"'
+    #                 destination_principal: 'destination.principal | "unknown"'
+    #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
+    #                 destination_version: 'destination.labels["version"] | "unknown"'
+    #         gateway:
+    #           metrics:
+    #             - name: "requests_total"
+    #               dimensions:
+    #                 source_app: 'source.labels["app.kubernetes.io/name"] | "TEST"'
+    #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
 
     meshConfig:
 
