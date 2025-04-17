@@ -13,11 +13,12 @@ spec:
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: "has(filter_state['upstream_peer']['app.kubernetes.io/name']) ? filter_state['upstream_peer']['app.kubernetes.io/name'] : 'test'"
+              value: 'has(node.metadata["LABELS"]["app.kubernetes.io/name"]) ? node.metadata["LABELS"]["app.kubernetes.io/name"] : "test"'
+              operation: UPSERT
         - match:
             mode: SERVER
             metric: ALL_METRICS
           tagOverrides:
             source_app:
               operation: UPSERT
-              value: "has(filter_state['downstream_peer']['app.kubernetes.io/name']) ? filter_state['downstream_peer']['app.kubernetes.io/name'] : 'test'"
+              value: 'has(node.metadata["LABELS"]["app.kubernetes.io/name"]) ? node.metadata["LABELS"]["app.kubernetes.io/name"] : "test"'
