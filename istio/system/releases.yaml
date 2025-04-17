@@ -70,7 +70,8 @@ spec:
               metrics:
                 - name: "requests_total"
                   dimensions:
-                    source_app: 'source.labels["app"] | "unknown"'
+                    source_app: 'source.labels["app.kubernetes.io/name"] | "TEST"'
+                    destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
 
     meshConfig:
 
