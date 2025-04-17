@@ -8,13 +8,17 @@ spec:
     - providers:
         - name: prometheus
       overrides:
-        - match:
-            metric: "REQUEST_COUNT"
-            mode: CLIENT_AND_SERVER
-          tagOverrides:
+        - tagOverrides:
             source_app:
-              value: source.labels["app.kubernetes.io/name"] | source.labels["app"] | "test"
               operation: UPSERT
-            destination_app:
-              value: destination.labels["app.kubernetes.io/name"] | destination.labels["app"]  | "test"
+              value: "node.metadata['LABELS']['app.kubernetes.io/name']"
+          match:
+            mode: CLIENT
+            metric: ALL_METRICS
+        - tagOverrides:
+            source_app:
               operation: UPSERT
+              value: "downstream_peer.labels['app.kubernetes.io/name'].value"
+          match:
+            mode: SERVER
+            metric: ALL_METRICS
