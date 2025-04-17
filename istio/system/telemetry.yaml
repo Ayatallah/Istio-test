@@ -9,7 +9,7 @@ spec:
         - name: prometheus
       overrides:
         - match:
-            metric: "REQUEST_TOTAL"
+            metric: "REQUEST_COUNT"
             mode: CLIENT_AND_SERVER
           tagOverrides:
             source_app:
