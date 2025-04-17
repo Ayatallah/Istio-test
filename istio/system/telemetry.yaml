@@ -5,6 +5,8 @@ metadata:
   namespace: istio-system
 spec:
   metrics:
+    providers:
+      - name: prometheus
     - overrides:
         - match:
             metric: "ALL_METRICS"
@@ -15,5 +17,3 @@ spec:
             destination_app:
               value: 'destination.labels["app.kubernetes.io/name"] | destination.labels["app"]  | "test"'
               operation: UPSERT
-      providers:
-        - name: prometheus
