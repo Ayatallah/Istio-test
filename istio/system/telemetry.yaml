@@ -17,7 +17,7 @@ spec:
               value: source.labels["app.kubernetes.io/name"] |
                      source.labels["app"] |
                      node.metadata["LABELS"]["app.kubernetes.io/name"] |
-                     "unknown"
+                     "test"
         - match:
             mode: SERVER
             metric: ALL_METRICS
@@ -26,4 +26,4 @@ spec:
               operation: UPSERT
               value: source.labels["app.kubernetes.io/name"] |
                      source.labels["app"] |
-                     "unknown"
+                     "test"
