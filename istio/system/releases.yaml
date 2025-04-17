@@ -47,7 +47,7 @@ spec:
             configOverride:
               inboundSidecar:
                 metrics:
-                  - name: "*"
+                  - name: "requests_total"
                     dimensions:
                       source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
                       source_version: 'source.labels["version"] | "unknown"'
@@ -58,7 +58,7 @@ spec:
                       destination_version: 'destination.labels["version"] | "unknown"'
               outboundSidecar:
                 metrics:
-                  - name: "*"
+                  - name: "requests_total"
                     dimensions:
                       source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
                       source_version: 'source.labels["version"] | "unknown"'
@@ -69,7 +69,7 @@ spec:
                       destination_version: 'destination.labels["version"] | "unknown"'
               gateway:
                 metrics:
-                  - name: "*"
+                  - name: "requests_total"
                     dimensions:
                       source_app: 'source.labels["app"] | "unknown"'
 
