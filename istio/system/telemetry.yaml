@@ -13,8 +13,8 @@ spec:
             mode: CLIENT_AND_SERVER
           tagOverrides:
             source_app:
-              value: 'source.labels["app.kubernetes.io/name"] | source.labels["app"] | "test"'
+              value: source.labels["app.kubernetes.io/name"] | source.labels["app"] | "test"
               operation: UPSERT
             destination_app:
-              value: 'destination.labels["app.kubernetes.io/name"] | destination.labels["app"]  | "test"'
+              value: destination.labels["app.kubernetes.io/name"] | destination.labels["app"]  | "test"
               operation: UPSERT
