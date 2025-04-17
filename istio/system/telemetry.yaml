@@ -13,11 +13,11 @@ spec:
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: "'test'"
+              value: "has(source.labels["app.kubernetes.io/name"]) ? source.labels["app.kubernetes.io/name"].value : 'test'"
         - match:
             mode: SERVER
             metric: ALL_METRICS
           tagOverrides:
             source_app:
               operation: UPSERT
-              value: "'test'"
+              value: "has(source.labels["app.kubernetes.io/name"]) ? source.labels["app.kubernetes.io/name"].value : 'test'"
