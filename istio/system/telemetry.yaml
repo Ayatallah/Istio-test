@@ -10,8 +10,8 @@ spec:
             metric: "ALL_METRICS"
           tagOverrides:
             source_app:
-              value: 'source.labels["app.kubernetes.io/name"] | "TEST"'
+              value: 'source.labels["app.kubernetes.io/name"] | "test"'
             destination_app:
-              value: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
+              value: 'destination.labels["app.kubernetes.io/name"] | "test"'
       providers:
         - name: prometheus
