@@ -13,16 +13,12 @@ spec:
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value:  "has(source.labels['app'].value) ? source.labels['app'].value : 'testooo'"
-              #value: "has(source.labels['app.kubernetes.io/name'])? source.labels['app.kubernetes.io/name'] : 'test'"
-              #value: 'has(node.metadata["LABELS"]["app.kubernetes.io/name"]) ? node.metadata["LABELS"]["app.kubernetes.io/name"] : "test"'
+              value:  "has(source.labels['app']) ? source.labels['app'] : 'testooo'"
               operation: UPSERT
         - match:
             mode: SERVER
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: "has(source.labels['app'].value) ? source.labels['app'].value : 'testooo'"
-              #value:  "has(source.labels['app.kubernetes.io/name'])? source.labels['app.kubernetes.io/name'] : 'test'"
+              value: "has(source.labels['app']) ? source.labels['app'] : 'testooo'"
               operation: UPSERT
-              #value: 'has(node.metadata["LABELS"]["app.kubernetes.io/name"]) ? node.metadata["LABELS"]["app.kubernetes.io/name"] : "test"'
