@@ -13,12 +13,12 @@ spec:
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value:  filter_state.upstream_peer.labels['test']
+              value: filter_state.upstream_peer.labels['version']
               operation: UPSERT
         - match:
             mode: SERVER
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: filter_state.downstream_peer.labels['test']
+              value: filter_state.downstream_peer.labels['version']
               operation: UPSERT
