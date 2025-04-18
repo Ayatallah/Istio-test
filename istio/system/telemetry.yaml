@@ -13,7 +13,7 @@ spec:
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: upstream_peer.labels["test"]
+              value: node.metadata["LABELS"]["test"]
               operation: UPSERT
         - match:
             mode: SERVER
