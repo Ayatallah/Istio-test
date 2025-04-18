@@ -19,6 +19,21 @@ spec:
             mode: SERVER
             metric: ALL_METRICS
           tagOverrides:
-            source_app:
+            destination_app:
               value: xds.node.metadata.LABELS["app.kubernetes.io/name"]
+              operation: UPSERT
+
+        - match:
+            mode: CLIENT
+            metric: ALL_METRICS
+          tagOverrides:
+            destination_app:
+              value: filter_state.upstream_peer.labels["app.kubernetes.io/name"]
+              operation: UPSERT
+        - match:
+            mode: SERVER
+            metric: ALL_METRICS
+          tagOverrides:
+            source_app:
+              value: filter_state.downstream_peer.labels["app.kubernetes.io/name"]
               operation: UPSERT
