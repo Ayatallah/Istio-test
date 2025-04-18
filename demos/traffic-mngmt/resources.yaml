@@ -69,6 +69,7 @@ spec:
       labels:
         app.kubernetes.io/name: details
         version: v1
+        test: details
     spec:
       serviceAccountName: bookinfo-details
       containers:
@@ -120,6 +121,7 @@ spec:
       labels:
         app.kubernetes.io/name: ratings
         version: v1
+        test: ratings
     spec:
       serviceAccountName: bookinfo-ratings
       containers:
@@ -171,6 +173,7 @@ spec:
       labels:
         app: reviews
         version: v1
+        test: reviews
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -211,6 +214,7 @@ spec:
       labels:
         app: reviews
         version: v2
+        test: review2
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -251,6 +255,7 @@ spec:
       labels:
         app: reviews
         version: v3
+        test: review3
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -319,6 +324,7 @@ spec:
       labels:
         app: productpage
         version: v1
+        test: productpage
     spec:
       serviceAccountName: bookinfo-productpage
       containers:
