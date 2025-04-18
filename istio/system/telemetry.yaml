@@ -28,12 +28,12 @@ spec:
             metric: ALL_METRICS
           tagOverrides:
             destination_app:
-              value: filter_state.upstream_peer.labels["WORKLOAD_NAME"]
+              value: filter_state.upstream_peer.labels["NAME"]
               operation: UPSERT
         - match:
             mode: SERVER
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: filter_state.downstream_peer.labels["WORKLOAD_NAME"]
+              value: filter_state.downstream_peer.labels["NAME"]
               operation: UPSERT

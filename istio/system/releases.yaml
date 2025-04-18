@@ -98,7 +98,8 @@ spec:
       #     "upstream_cluster": "%UPSTREAM_CLUSTER%",
       #     "upstream_host": "%UPSTREAM_HOST%"
       #   }
-
+    env:
+      PILOT_MX_ADDITIONAL_LABELS: "app.kubernetes.io/name"
     global:
       proxy:
         logLevel: trace
