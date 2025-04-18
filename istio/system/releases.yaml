@@ -101,7 +101,7 @@ spec:
 
     global:
       proxy:
-        logLevel: debug
+        logLevel: trace
         resources:
           requests:
             cpu: "100m"
