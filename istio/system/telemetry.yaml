@@ -13,12 +13,12 @@ spec:
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: node.metadata["LABELS"]["test"]
+              value: node.metadata["LABELS"]["app.kubernetes.io/name"]
               operation: UPSERT
         - match:
             mode: SERVER
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: source.labels["test"]
+              value: source.labels["app.kubernetes.io/name"]
               operation: UPSERT
