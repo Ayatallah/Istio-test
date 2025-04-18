@@ -13,12 +13,12 @@ spec:
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: "has(upstream_peer.labels['app']) ? upstream_peer.labels['app'].value : 'test'"
+              value: "has(upstream_peer.labels['app'].value) ? upstream_peer.labels['app'].value : 'test'"
               operation: UPSERT
         - match:
             mode: SERVER
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: "has(downstream_peer.labels['app']) ? downstream_peer.labels['app'].value : 'test'"
+              value: "has(downstream_peer.labels['app'].value) ? downstream_peer.labels['app'].value : 'test'"
               operation: UPSERT
