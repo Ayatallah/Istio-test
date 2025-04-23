@@ -1,31 +1,31 @@
-apiVersion: telemetry.istio.io/v1
-kind: Telemetry
-metadata:
-  name: custom-metrics
-  namespace: istio-system
-spec:
-  metrics:
-    - providers:
-        - name: prometheus
-      overrides:
-        - match:
-            mode: CLIENT
-            metric: ALL_METRICS
-          tagOverrides:
-            source_app:
-              value: xds.node.metadata.LABELS["app.kubernetes.io/name"]
-              operation: UPSERT
-            destination_app:
-              value: filter_state.upstream_peer.labels["app.kubernetes.io/name"]
-              operation: UPSERT
-
-        - match:
-            mode: SERVER
-            metric: ALL_METRICS
-          tagOverrides:
-            destination_app:
-              value: xds.node.metadata.LABELS["app.kubernetes.io/name"]
-              operation: UPSERT
-            source_app:
-              value: filter_state.downstream_peer.labels["app.kubernetes.io/name"]
-              operation: UPSERT
+# apiVersion: telemetry.istio.io/v1
+# kind: Telemetry
+# metadata:
+#   name: custom-metrics
+#   namespace: istio-system
+# spec:
+#   metrics:
+#     - providers:
+#         - name: prometheus
+#       overrides:
+#         - match:
+#             mode: CLIENT
+#             metric: ALL_METRICS
+#           tagOverrides:
+#             source_app:
+#               value: xds.node.metadata.LABELS["app.kubernetes.io/name"]
+#               operation: UPSERT
+#             destination_app:
+#               value: filter_state.upstream_peer.labels["app.kubernetes.io/name"]
+#               operation: UPSERT
+#
+#         - match:
+#             mode: SERVER
+#             metric: ALL_METRICS
+#           tagOverrides:
+#             destination_app:
+#               value: xds.node.metadata.LABELS["app.kubernetes.io/name"]
+#               operation: UPSERT
+#             source_app:
+#               value: filter_state.downstream_peer.labels["app.kubernetes.io/name"]
+#               operation: UPSERT
