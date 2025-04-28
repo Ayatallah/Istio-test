@@ -74,9 +74,9 @@ spec:
     #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
 
     meshConfig:
-      # defaultConfig:
-      #   proxyMetadata:
-      #     BOOTSTRAP_XDS_AGENT: "true"
+      defaultConfig:
+        proxyMetadata:
+          BOOTSTRAP_XDS_AGENT: "true"
 
       accessLogFile: "/dev/stdout"
       accessLogEncoding: TEXT
