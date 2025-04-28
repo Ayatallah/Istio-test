@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: envoy-stats-1
+  namespace: istio-system
+spec:
+  configPatches:
+  - applyTo: BOOTSTRAP
+    patch:
+      operation: MERGE
+      value:
+        stats_config:
+          histogram_bucket_settings:
+            - match:
+                prefix: istiocustom
+              buckets: [1,5,50,500,5000,10000]
