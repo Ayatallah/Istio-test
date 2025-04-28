@@ -1,0 +1,12 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ProxyConfig
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  proxyMetadata:
+    ISTIO_META_METRICS_CONFIG: |
+      histogram_bucket_settings:
+        - match:
+            contains: istio
+          buckets: [1, 10, 100, 1000]
