@@ -66,6 +66,8 @@ spec:
       version: v1
   template:
     metadata:
+      annotation:
+        sidecar.istio.io/statsHistogramBuckets: '{"istiocustom":[1,5,50,500,5000,10000]}'
       labels:
         app.kubernetes.io/name: details
         version: v1
@@ -118,6 +120,8 @@ spec:
       version: v1
   template:
     metadata:
+      annotation:
+        sidecar.istio.io/statsHistogramBuckets: '{"istiocustom":[1,5,50,500,5000,10000]}'
       labels:
         app.kubernetes.io/name: ratings
         version: v1
@@ -170,6 +174,8 @@ spec:
       version: v1
   template:
     metadata:
+      annotation:
+        sidecar.istio.io/statsHistogramBuckets: '{"istiocustom":[1,5,50,500,5000,10000]}'
       labels:
         app: reviews
         version: v1
@@ -211,6 +217,8 @@ spec:
       version: v2
   template:
     metadata:
+      annotation:
+        sidecar.istio.io/statsHistogramBuckets: '{"istiocustom":[1,5,50,500,5000,10000]}'
       labels:
         app: reviews
         version: v2
@@ -252,6 +260,8 @@ spec:
       version: v3
   template:
     metadata:
+      annotation:
+        sidecar.istio.io/statsHistogramBuckets: '{"istiocustom":[1,5,50,500,5000,10000]}'
       labels:
         app: reviews
         version: v3
@@ -317,10 +327,8 @@ spec:
       version: v1
   template:
     metadata:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "9080"
-        prometheus.io/path: "/metrics"
+      annotation:
+        sidecar.istio.io/statsHistogramBuckets: '{"istiocustom":[1,5,50,500,5000,10000]}'
       labels:
         app: productpage
         version: v1
