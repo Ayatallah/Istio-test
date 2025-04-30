@@ -3,14 +3,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: opentelemetry-collector-conf
-  namespace: observability
+  namespace: istio-system
   labels:
     app: opentelemetry-collector
 data:
   opentelemetry-collector-config: |
     receivers:
-      opencensus:
-        endpoint: 0.0.0.0:55678
       otlp:
         protocols:
           grpc:
@@ -18,9 +16,6 @@ data:
     processors:
       batch:
     exporters:
-      zipkin:
-        # Export to zipkin for easy querying
-        endpoint: http://zipkin.istio-system.svc:9411/api/v2/spans
       logging:
         loglevel: debug
       jaeger:
@@ -43,35 +38,23 @@ data:
           processors: [batch]
           exporters: [logging]
         traces:
-          receivers:
-          - otlp
-          - opencensus
-          exporters:
-          - zipkin
-          - logging
-          - jaeger
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [logging, jaeger]
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: opentelemetry-collector
-  namespace: observability
+  namespace: istio-system
   labels:
     app: opentelemetry-collector
 spec:
   ports:
-    - name: grpc-opencensus
-      port: 55678
-      protocol: TCP
-      targetPort: 55678
     - name: grpc-otlp # Default endpoint for OpenTelemetry receiver.
       port: 4317
       protocol: TCP
       targetPort: 4317
-    - name: http-otlp # HTTP endpoint for OpenTelemetry receiver.
-      port: 4318
-      protocol: TCP
-      targetPort: 4318
   selector:
     app: opentelemetry-collector
 ---
@@ -79,7 +62,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: opentelemetry-collector
-  namespace: observability
+  namespace: istio-system
 spec:
   selector:
     matchLabels:
@@ -110,16 +93,11 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: metadata.namespace
-          image: otel/opentelemetry-collector:0.54.0
+          image: otel/opentelemetry-collector:0.71.0
           imagePullPolicy: IfNotPresent
           name: opentelemetry-collector
           ports:
             - containerPort: 4317
-              protocol: TCP
-            - containerPort: 4318
-              protocol: TCP
-            - name: grpc-opencensus
-              containerPort: 55678
               protocol: TCP
           resources:
             limits:
