@@ -81,7 +81,7 @@ spec:
       defaultConfig:
         tracing: {} # disable legacy MeshConfig tracing options
       extensionProviders:
-      - name: otel
+      - name: otel-tracing
         opentelemetry:
           port: 4317
           service: opentelemetry-collector.observability.svc.cluster.local

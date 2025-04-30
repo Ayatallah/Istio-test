@@ -22,5 +22,5 @@ spec:
               operation: REMOVE
   tracing:
   - providers:
-    - name: otel
+    - name: otel-tracing
     randomSamplingPercentage: 100.00
