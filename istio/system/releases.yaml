@@ -85,8 +85,8 @@ spec:
         opentelemetry:
           port: 4317
           service: opentelemetry-collector.observability.svc.cluster.local
-          resource_detectors:
-            environment: {}
+          # resource_detectors:
+          #   environment: {}
       accessLogFile: "/dev/stdout"
       accessLogEncoding: TEXT
       accessLogFormat: >
