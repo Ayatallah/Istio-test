@@ -23,4 +23,4 @@ spec:
   tracing:
   - providers:
     - name: otel
-    randomSamplingPercentage: 100
+    randomSamplingPercentage: 100.00
