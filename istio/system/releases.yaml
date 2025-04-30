@@ -81,10 +81,12 @@ spec:
       defaultConfig:
         tracing: {} # disable legacy MeshConfig tracing options
       extensionProviders:
-      - name: jaeger
+      - name: otel
         opentelemetry:
           port: 4317
-          service: jaeger-collector.istio-system.svc.cluster.local
+          service: opentelemetry-collector.observability.svc.cluster.local
+          resource_detectors:
+            environment: {}
       accessLogFile: "/dev/stdout"
       accessLogEncoding: TEXT
       accessLogFormat: >
