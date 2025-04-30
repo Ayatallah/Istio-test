@@ -1,4 +1,3 @@
-# https://raw.githubusercontent.com/istio/istio/release-1.25/samples/bookinfo/platform/kube/bookinfo.yaml
 # Copyright Istio Authors
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +41,7 @@ spec:
   - port: 9080
     name: http
   selector:
-    app.kubernetes.io/name: details
+    app: details
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -56,20 +55,19 @@ kind: Deployment
 metadata:
   name: details-v1
   labels:
-    app.kubernetes.io/name: details
+    app: details
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: details
+      app: details
       version: v1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: details
+        app: details
         version: v1
-        test: details
     spec:
       serviceAccountName: bookinfo-details
       containers:
@@ -87,7 +85,7 @@ kind: Service
 metadata:
   name: ratings
   labels:
-    app.kubernetes.io/name: ratings
+    app: ratings
     service: ratings
 spec:
   ports:
@@ -108,20 +106,19 @@ kind: Deployment
 metadata:
   name: ratings-v1
   labels:
-    app.kubernetes.io/name: ratings
+    app: ratings
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: ratings
+      app: ratings
       version: v1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: ratings
+        app: ratings
         version: v1
-        test: ratings
     spec:
       serviceAccountName: bookinfo-ratings
       containers:
@@ -173,7 +170,6 @@ spec:
       labels:
         app: reviews
         version: v1
-        test: reviews
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -211,12 +207,9 @@ spec:
       version: v2
   template:
     metadata:
-      # annotations:
-      #   sidecar.istio.io/statsHistogramBuckets: '{"istiocustom":[1,5,50,500,5000,10000]}'
       labels:
         app: reviews
         version: v2
-        test: review2
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -254,12 +247,9 @@ spec:
       version: v3
   template:
     metadata:
-      # annotations:
-      #   sidecar.istio.io/statsHistogramBuckets: '{"istiocustom":[1,5,50,500,5000,10000]}'
       labels:
         app: reviews
         version: v3
-        test: review3
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -321,10 +311,13 @@ spec:
       version: v1
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9080"
+        prometheus.io/path: "/metrics"
       labels:
         app: productpage
         version: v1
-        test: productpage
     spec:
       serviceAccountName: bookinfo-productpage
       containers:

@@ -9,26 +9,17 @@ spec:
         - name: prometheus
       overrides:
         - match:
-            mode: CLIENT
+            mode: CLIENT_AND_SERVER
             metric: ALL_METRICS
           tagOverrides:
             source_app:
-              value: xds.node.metadata.LABELS["app.kubernetes.io/name"]
-              operation: UPSERT
+              operation: REMOVE
             destination_app:
-              value: filter_state.upstream_peer.labels["app.kubernetes.io/name"]
-              operation: UPSERT
-
-        - match:
-            mode: SERVER
-            metric: ALL_METRICS
-          tagOverrides:
-            destination_app:
-              value: xds.node.metadata.LABELS["app.kubernetes.io/name"]
-              operation: UPSERT
-            source_app:
-              value: filter_state.downstream_peer.labels["app.kubernetes.io/name"]
-              operation: UPSERT
+              operation: REMOVE
+            source_version:
+              operation: REMOVE
+            destination_version:
+              operation: REMOVE
   tracing:
   - providers:
     - name: jaeger

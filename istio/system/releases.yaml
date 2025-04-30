@@ -109,8 +109,8 @@ spec:
       #     "upstream_host": "%UPSTREAM_HOST%"
       #   }
     env:
-      PILOT_MX_ADDITIONAL_LABELS: "app.kubernetes.io/name"
-      BOOTSTRAP_XDS_AGENT: "true"
+      # PILOT_MX_ADDITIONAL_LABELS: "app.kubernetes.io/name"
+      # BOOTSTRAP_XDS_AGENT: "true"
     global:
       proxy:
         logLevel: trace
