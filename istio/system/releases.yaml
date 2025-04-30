@@ -115,6 +115,7 @@ spec:
       # BOOTSTRAP_XDS_AGENT: "true"
     global:
       proxy:
+        tracer: opentelemetry
         logLevel: trace
         resources:
           requests:
