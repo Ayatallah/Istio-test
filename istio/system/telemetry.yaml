@@ -29,3 +29,6 @@ spec:
             source_app:
               value: filter_state.downstream_peer.labels["app.kubernetes.io/name"]
               operation: UPSERT
+  tracing:
+  - providers:
+    - name: jaeger

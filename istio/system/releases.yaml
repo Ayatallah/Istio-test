@@ -77,7 +77,14 @@ spec:
       # defaultConfig:
       #   proxyMetadata:
       #     BOOTSTRAP_XDS_AGENT: "true"
-
+      enableTracing: true
+      defaultConfig:
+        tracing: {} # disable legacy MeshConfig tracing options
+      extensionProviders:
+      - name: jaeger
+        opentelemetry:
+          port: 4317
+          service: jaeger-collector.istio-system.svc.cluster.local
       accessLogFile: "/dev/stdout"
       accessLogEncoding: TEXT
       accessLogFormat: >
