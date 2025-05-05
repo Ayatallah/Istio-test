@@ -17,8 +17,8 @@ data:
     processors:
       batch:
     exporters:
-      otlp:
-        endpoint: jaeger-collector.istio-system.svc.cluster.local:4317
+      jaeger:
+        endpoint: jaeger-collector.istio-system.svc.cluster.local:14250
         tls:
           insecure: true
       logging:
