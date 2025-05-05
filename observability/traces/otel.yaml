@@ -27,7 +27,6 @@ data:
         verbosity: detailed
     extensions:
       health_check:
-        port: 13133
     service:
       telemetry:
         logs:
