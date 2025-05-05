@@ -105,7 +105,7 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: metadata.namespace
-          image: otel/opentelemetry-collector:0.54.0
+          image: otel/opentelemetry-collector:0.88.0
           imagePullPolicy: IfNotPresent
           name: opentelemetry-collector
           ports:
