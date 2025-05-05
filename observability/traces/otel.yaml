@@ -29,7 +29,7 @@ data:
     service:
       telemetry:
         logs:
-          level: "DEBUG"
+          level: "debug"
       extensions:
       - health_check
       pipelines:
