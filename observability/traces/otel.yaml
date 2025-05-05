@@ -42,7 +42,7 @@ data:
           - otlp
           exporters:
           - logging
-          - otlp
+          - jaeger
 ---
 apiVersion: v1
 kind: Service
