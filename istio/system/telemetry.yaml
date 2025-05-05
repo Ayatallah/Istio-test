@@ -22,5 +22,5 @@ spec:
               operation: REMOVE
   tracing:
   - providers:
-    - name: jaeger
+    - name: opentelemetry
     randomSamplingPercentage: 100.00

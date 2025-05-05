@@ -74,17 +74,17 @@ spec:
     #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
 
     meshConfig:
-      # defaultConfig:
-      #   proxyMetadata:
-      #     BOOTSTRAP_XDS_AGENT: "true"
       enableTracing: true
       defaultConfig:
         tracing: {} # disable legacy MeshConfig tracing options
+      defaultProviders:
+        tracing:
+          - "opentelemetry"
       extensionProviders:
-      - name: jaeger
-        jaeger:
+      - name: "opentelemetry"
+        opentelemetry:
           port: 4317
-          service: jaeger-collector.istio-system.svc.cluster.local
+          service: opentelemetry-collector.istio-system.svc.cluster.local
           resource_detectors:
             environment: {}
       accessLogFile: "/dev/stdout"
@@ -115,7 +115,7 @@ spec:
       # BOOTSTRAP_XDS_AGENT: "true"
     global:
       proxy:
-        tracer: opentelemetry
+        tracer: none
         logLevel: trace
         resources:
           requests:
