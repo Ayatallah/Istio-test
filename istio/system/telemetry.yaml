@@ -22,5 +22,5 @@ spec:
               operation: REMOVE
   tracing:
   - providers:
-    - name: otel-tracing
+    - name: jaeger
     randomSamplingPercentage: 100.00
