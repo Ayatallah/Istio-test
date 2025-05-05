@@ -36,6 +36,8 @@ spec:
               value: "50000"
             - name: QUERY_BASE_PATH
               value: /jaeger
+            - name: COLLECTOR_OTLP_ENABLED
+              value: "true"
           livenessProbe:
             httpGet:
               path: /
