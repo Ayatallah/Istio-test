@@ -1,9 +1,9 @@
 # https://raw.githubusercontent.com/istio/istio/release-1.25/samples/open-telemetry/otel.yaml
+# https://www.alibabacloud.com/help/en/opentelemetry/user-guide/use-opentelemetry-to-perform-tracing-analysis-on-istio#76f2905f0ek1p
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: opentelemetry-collector-conf
-  namespace: istio-system
   labels:
     app: opentelemetry-collector
 data:
@@ -16,18 +16,15 @@ data:
     processors:
       batch:
     exporters:
-      logging:
-        loglevel: debug
-      jaeger:
-        endpoint: jaeger-collector.istio-system.svc.cluster.local:14250
+      otlp:
+        endpoint: jaeger-collector.istio-system.svc.cluster.local:4317
         tls:
           insecure: true
-        sending_queue:
-          enabled: true
-        retry_on_failure:
-          enabled: true
+      logging:
+        loglevel: debug
     extensions:
       health_check:
+        port: 13133
     service:
       extensions:
       - health_check
@@ -37,23 +34,32 @@ data:
           processors: [batch]
           exporters: [logging]
         traces:
-          receivers: [otlp]
-          processors: [batch]
-          exporters: [logging, jaeger]
+          receivers:
+          - otlp
+          exporters:
+          - logging
+          - otlp
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: opentelemetry-collector
-  namespace: istio-system
   labels:
     app: opentelemetry-collector
 spec:
   ports:
+    - name: grpc-opencensus
+      port: 55678
+      protocol: TCP
+      targetPort: 55678
     - name: grpc-otlp # Default endpoint for OpenTelemetry receiver.
       port: 4317
       protocol: TCP
       targetPort: 4317
+    - name: http-otlp # HTTP endpoint for OpenTelemetry receiver.
+      port: 4318
+      protocol: TCP
+      targetPort: 4318
   selector:
     app: opentelemetry-collector
 ---
@@ -61,7 +67,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: opentelemetry-collector
-  namespace: istio-system
 spec:
   selector:
     matchLabels:
@@ -92,11 +97,16 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: metadata.namespace
-          image: otel/opentelemetry-collector:0.71.0
+          image: otel/opentelemetry-collector:0.54.0
           imagePullPolicy: IfNotPresent
           name: opentelemetry-collector
           ports:
             - containerPort: 4317
+              protocol: TCP
+            - containerPort: 4318
+              protocol: TCP
+            - name: grpc-opencensus
+              containerPort: 55678
               protocol: TCP
           resources:
             limits:
