@@ -4,23 +4,23 @@ metadata:
   name: custom-metrics
   namespace: istio-system
 spec:
-  metrics:
-    - providers:
-        - name: prometheus
-      overrides:
-        - match:
-            mode: CLIENT_AND_SERVER
-            metric: ALL_METRICS
-          tagOverrides:
-            source_app:
-              operation: REMOVE
-            destination_app:
-              operation: REMOVE
-            source_version:
-              operation: REMOVE
-            destination_version:
-              operation: REMOVE
   tracing:
   - providers:
     - name: opentelemetry
     randomSamplingPercentage: 100.00
+  # metrics:
+  #   - providers:
+  #       - name: prometheus
+  #     overrides:
+  #       - match:
+  #           mode: CLIENT_AND_SERVER
+  #           metric: ALL_METRICS
+  #         tagOverrides:
+  #           source_app:
+  #             operation: REMOVE
+  #           destination_app:
+  #             operation: REMOVE
+  #           source_version:
+  #             operation: REMOVE
+  #           destination_version:
+  #             operation: REMOVE
