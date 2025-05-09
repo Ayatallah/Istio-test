@@ -29,6 +29,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: tracing-grpc
+  namespace: istio-system
 spec:
   hosts:
   - opentelemetry-collector.istio-system.svc.cluster.local
