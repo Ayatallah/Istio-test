@@ -81,12 +81,12 @@ spec:
         tracing:
           - "otel-tracing"
       extensionProviders:
-      - name: otel-tracing
-        opentelemetry:
-          port: 4317
-          service: opentelemetry-collector.istio-system.svc.cluster.local
-          resourceDetectors:
-            environment: {}
+        - name: otel-tracing
+          opentelemetry:
+            port: 4317
+            service: opentelemetry-collector.istio-system.svc.cluster.local
+            resourceDetectors:
+              environment: {}
       accessLogFile: "/dev/stdout"
       accessLogEncoding: TEXT
       accessLogFormat: >
