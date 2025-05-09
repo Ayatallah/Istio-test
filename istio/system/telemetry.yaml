@@ -6,7 +6,7 @@ metadata:
 spec:
   tracing:
   - providers:
-    - name: opentelemetry
+    - name: otel-tracing
     randomSamplingPercentage: 100.00
   # metrics:
   #   - providers:
