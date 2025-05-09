@@ -85,7 +85,7 @@ spec:
         opentelemetry:
           port: 4317
           service: opentelemetry-collector.istio-system.svc.cluster.local
-          resource_detectors:
+          resourceDetectors:
             environment: {}
       accessLogFile: "/dev/stdout"
       accessLogEncoding: TEXT
