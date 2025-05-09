@@ -115,7 +115,7 @@ spec:
       # BOOTSTRAP_XDS_AGENT: "true"
     global:
       proxy:
-        # tracer: none
+        tracer: none
         logLevel: trace
         resources:
           requests:
