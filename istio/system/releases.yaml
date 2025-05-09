@@ -77,9 +77,9 @@ spec:
       enableTracing: true
       # defaultConfig:
       #   tracing: {} # disable legacy MeshConfig tracing options
-      # defaultProviders:
-      #   tracing:
-      #     - "opentelemetry"
+      defaultProviders:
+        tracing:
+          - "otel-tracing"
       extensionProviders:
       - name: otel-tracing
         opentelemetry:
