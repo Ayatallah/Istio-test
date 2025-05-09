@@ -24,3 +24,17 @@ spec:
   #             operation: REMOVE
   #           destination_version:
   #             operation: REMOVE
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: tracing-grpc
+spec:
+  hosts:
+  - opentelemetry-collector.istio-system.svc.cluster.local
+  ports:
+  - number: 4317
+    name: grpc-otlp
+    protocol: GRPC
+  resolution: DNS
+  location: MESH_EXTERNAL
