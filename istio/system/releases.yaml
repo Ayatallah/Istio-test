@@ -1,125 +1,125 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: istio-base
-  namespace: istio-system
-spec:
-  interval: 1m
-  chart:
-    spec:
-      chart: base
-      version: '1.25.0'
-      sourceRef:
-        kind: HelmRepository
-        name: istio
-        namespace: istio-system
-      interval: 1m
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: istiod
-  namespace: istio-system
-spec:
-  interval: 5m
-  dependsOn:
-    - name: istio-base
-      namespace: istio-system
-  chart:
-    spec:
-      chart: istiod
-      version: '1.25.0'
-      sourceRef:
-        kind: HelmRepository
-        name: istio
-      interval: 1m
-  values:
-    resources:
-      requests:
-        cpu: 500m
-        memory: 2048Mi
-
-    # telemetry:
-    #   v2:
-    #     prometheus:
-    #       enabled: true
-    #       configOverride:
-    #         inboundSidecar:
-    #           metrics:
-    #             - name: "requests_total"
-    #               dimensions:
-    #                 source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
-    #                 source_version: 'source.labels["version"] | "unknown"'
-    #                 destination_workload: 'destination.workload.name | "unknown"'
-    #                 destination_workload_namespace: 'destination.workload.namespace | "unknown"'
-    #                 destination_principal: 'destination.principal | "unknown"'
-    #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
-    #                 destination_version: 'destination.labels["version"] | "unknown"'
-    #         outboundSidecar:
-    #           metrics:
-    #             - name: "requests_total"
-    #               dimensions:
-    #                 source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
-    #                 source_version: 'source.labels["version"] | "unknown"'
-    #                 destination_workload: 'destination.workload.name | "unknown"'
-    #                 destination_workload_namespace: 'destination.workload.namespace | "unknown"'
-    #                 destination_principal: 'destination.principal | "unknown"'
-    #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
-    #                 destination_version: 'destination.labels["version"] | "unknown"'
-    #         gateway:
-    #           metrics:
-    #             - name: "requests_total"
-    #               dimensions:
-    #                 source_app: 'source.labels["app.kubernetes.io/name"] | "TEST"'
-    #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
-
-    meshConfig:
-      enableTracing: true
-      # defaultConfig:
-      #   tracing: {} # disable legacy MeshConfig tracing options
-      defaultProviders:
-        tracing:
-          - "otel-tracing"
-      extensionProviders:
-        - name: otel-tracing
-          opentelemetry:
-            port: 4317
-            service: opentelemetry-collector.istio-system.svc.cluster.local
-            resourceDetectors:
-              environment: {}
-      accessLogFile: "/dev/stdout"
-      accessLogEncoding: TEXT
-      accessLogFormat: >
-        start_time=%START_TIME% method=%REQ(:METHOD)% path=%REQ(X-ENVOY-ORIGINAL-PATH?:PATH)% protocol=%PROTOCOL%
-        request_id=%REQ(X-REQUEST-ID)% user_agent=%REQ(USER-AGENT)% x_forwarded_for=%REQ(X-FORWARDED-FOR)% response_code=%RESPONSE_CODE%
-        upstream_cluster=%UPSTREAM_CLUSTER% upstream_host=%UPSTREAM_HOST% bytes_received=%BYTES_RECEIVED% bytes_sent=%BYTES_SENT% duration_ms=%DURATION%
-
-      # Grafana Loki shows JSON attributes in alphabatical order
-      #   {
-      #     "start_time": "%START_TIME%",
-      #     "method": "%REQ(:METHOD)%",
-      #     "path": "%REQ(X-ENVOY-ORIGINAL-PATH?:PATH)%",
-      #     "protocol": "%PROTOCOL%",
-      #     "request_id": "%REQ(X-REQUEST-ID)%",
-      #     "user_agent": "%REQ(USER-AGENT)%",
-      #     "x_forwarded_for": "%REQ(X-FORWARDED-FOR)%",
-      #     "response_code": "%RESPONSE_CODE%",
-      #     "bytes_received": "%BYTES_RECEIVED%",
-      #     "bytes_sent": "%BYTES_SENT%",
-      #     "duration_ms": "%DURATION%",
-      #     "upstream_cluster": "%UPSTREAM_CLUSTER%",
-      #     "upstream_host": "%UPSTREAM_HOST%"
-      #   }
-    env:
-      # PILOT_MX_ADDITIONAL_LABELS: "app.kubernetes.io/name"
-      # BOOTSTRAP_XDS_AGENT: "true"
-    global:
-      proxy:
-        tracer: none
-        logLevel: trace
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "128Mi"
-      # imagePullSecrets:
-      #   - test
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: istio-base
+#   namespace: istio-system
+# spec:
+#   interval: 1m
+#   chart:
+#     spec:
+#       chart: base
+#       version: '1.25.0'
+#       sourceRef:
+#         kind: HelmRepository
+#         name: istio
+#         namespace: istio-system
+#       interval: 1m
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: istiod
+#   namespace: istio-system
+# spec:
+#   interval: 5m
+#   dependsOn:
+#     - name: istio-base
+#       namespace: istio-system
+#   chart:
+#     spec:
+#       chart: istiod
+#       version: '1.25.0'
+#       sourceRef:
+#         kind: HelmRepository
+#         name: istio
+#       interval: 1m
+#   values:
+#     resources:
+#       requests:
+#         cpu: 500m
+#         memory: 2048Mi
+#
+#     # telemetry:
+#     #   v2:
+#     #     prometheus:
+#     #       enabled: true
+#     #       configOverride:
+#     #         inboundSidecar:
+#     #           metrics:
+#     #             - name: "requests_total"
+#     #               dimensions:
+#     #                 source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
+#     #                 source_version: 'source.labels["version"] | "unknown"'
+#     #                 destination_workload: 'destination.workload.name | "unknown"'
+#     #                 destination_workload_namespace: 'destination.workload.namespace | "unknown"'
+#     #                 destination_principal: 'destination.principal | "unknown"'
+#     #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
+#     #                 destination_version: 'destination.labels["version"] | "unknown"'
+#     #         outboundSidecar:
+#     #           metrics:
+#     #             - name: "requests_total"
+#     #               dimensions:
+#     #                 source_app: 'source.labels["app.kubernetes.io/name"] | "unknown"'
+#     #                 source_version: 'source.labels["version"] | "unknown"'
+#     #                 destination_workload: 'destination.workload.name | "unknown"'
+#     #                 destination_workload_namespace: 'destination.workload.namespace | "unknown"'
+#     #                 destination_principal: 'destination.principal | "unknown"'
+#     #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
+#     #                 destination_version: 'destination.labels["version"] | "unknown"'
+#     #         gateway:
+#     #           metrics:
+#     #             - name: "requests_total"
+#     #               dimensions:
+#     #                 source_app: 'source.labels["app.kubernetes.io/name"] | "TEST"'
+#     #                 destination_app: 'destination.labels["app.kubernetes.io/name"] | "TEST"'
+#
+#     meshConfig:
+#       enableTracing: true
+#       # defaultConfig:
+#       #   tracing: {} # disable legacy MeshConfig tracing options
+#       defaultProviders:
+#         tracing:
+#           - "otel-tracing"
+#       extensionProviders:
+#         - name: otel-tracing
+#           opentelemetry:
+#             port: 4317
+#             service: opentelemetry-collector.istio-system.svc.cluster.local
+#             resourceDetectors:
+#               environment: {}
+#       accessLogFile: "/dev/stdout"
+#       accessLogEncoding: TEXT
+#       accessLogFormat: >
+#         start_time=%START_TIME% method=%REQ(:METHOD)% path=%REQ(X-ENVOY-ORIGINAL-PATH?:PATH)% protocol=%PROTOCOL%
+#         request_id=%REQ(X-REQUEST-ID)% user_agent=%REQ(USER-AGENT)% x_forwarded_for=%REQ(X-FORWARDED-FOR)% response_code=%RESPONSE_CODE%
+#         upstream_cluster=%UPSTREAM_CLUSTER% upstream_host=%UPSTREAM_HOST% bytes_received=%BYTES_RECEIVED% bytes_sent=%BYTES_SENT% duration_ms=%DURATION%
+#
+#       # Grafana Loki shows JSON attributes in alphabatical order
+#       #   {
+#       #     "start_time": "%START_TIME%",
+#       #     "method": "%REQ(:METHOD)%",
+#       #     "path": "%REQ(X-ENVOY-ORIGINAL-PATH?:PATH)%",
+#       #     "protocol": "%PROTOCOL%",
+#       #     "request_id": "%REQ(X-REQUEST-ID)%",
+#       #     "user_agent": "%REQ(USER-AGENT)%",
+#       #     "x_forwarded_for": "%REQ(X-FORWARDED-FOR)%",
+#       #     "response_code": "%RESPONSE_CODE%",
+#       #     "bytes_received": "%BYTES_RECEIVED%",
+#       #     "bytes_sent": "%BYTES_SENT%",
+#       #     "duration_ms": "%DURATION%",
+#       #     "upstream_cluster": "%UPSTREAM_CLUSTER%",
+#       #     "upstream_host": "%UPSTREAM_HOST%"
+#       #   }
+#     env:
+#       # PILOT_MX_ADDITIONAL_LABELS: "app.kubernetes.io/name"
+#       # BOOTSTRAP_XDS_AGENT: "true"
+#     global:
+#       proxy:
+#         tracer: none
+#         logLevel: trace
+#         resources:
+#           requests:
+#             cpu: "100m"
+#             memory: "128Mi"
+#       # imagePullSecrets:
+#       #   - test
