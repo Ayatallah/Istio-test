@@ -20,8 +20,8 @@ data:
     exporters:
       logging:
         loglevel: debug
-      jaeger:
-        endpoint: jaeger-collector.istio-system.svc.cluster.local:14250
+      otlp:
+        endpoint: jaeger-collector.istio-system.svc.cluster.local:4317
         tls:
           insecure: true
         sending_queue:
@@ -45,7 +45,7 @@ data:
           - opencensus
           exporters:
           - logging
-          - jaeger
+          - otlp
 ---
 apiVersion: v1
 kind: Service
@@ -106,7 +106,7 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: metadata.namespace
-          image: otel/opentelemetry-collector:0.54.0
+          image: otel/opentelemetry-collector:0.85.0
           imagePullPolicy: IfNotPresent
           name: opentelemetry-collector
           ports:
