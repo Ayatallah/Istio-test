@@ -30,7 +30,6 @@ data:
           enabled: true
     extensions:
       health_check:
-        port: 13133
     service:
       extensions:
       - health_check
