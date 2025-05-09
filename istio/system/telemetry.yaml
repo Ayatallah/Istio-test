@@ -1,29 +1,29 @@
-# apiVersion: telemetry.istio.io/v1
-# kind: Telemetry
-# metadata:
-#   name: custom-metrics
-#   namespace: istio-system
-# spec:
-#   tracing:
-#   - providers:
-#     - name: otel-tracing
-#     randomSamplingPercentage: 100.00
-#   # metrics:
-#   #   - providers:
-#   #       - name: prometheus
-#   #     overrides:
-#   #       - match:
-#   #           mode: CLIENT_AND_SERVER
-#   #           metric: ALL_METRICS
-#   #         tagOverrides:
-#   #           source_app:
-#   #             operation: REMOVE
-#   #           destination_app:
-#   #             operation: REMOVE
-#   #           source_version:
-#   #             operation: REMOVE
-#   #           destination_version:
-#   #             operation: REMOVE
+apiVersion: telemetry.istio.io/v1
+kind: Telemetry
+metadata:
+  name: custom-metrics
+  namespace: istio-system
+spec:
+  tracing:
+  - providers:
+    - name: otel-tracing
+    randomSamplingPercentage: 100.00
+  # metrics:
+  #   - providers:
+  #       - name: prometheus
+  #     overrides:
+  #       - match:
+  #           mode: CLIENT_AND_SERVER
+  #           metric: ALL_METRICS
+  #         tagOverrides:
+  #           source_app:
+  #             operation: REMOVE
+  #           destination_app:
+  #             operation: REMOVE
+  #           source_version:
+  #             operation: REMOVE
+  #           destination_version:
+  #             operation: REMOVE
 # ---
 # apiVersion: networking.istio.io/v1alpha3
 # kind: ServiceEntry
